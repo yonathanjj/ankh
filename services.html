@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh - Services</title>
+    <link rel="stylesheet" href="assets/css/services.css">
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <!-- Section 1: What We Offer -->
+    <section class="offer-section">
+        <header class="section-header">
+            <h2>What We Offer</h2>
+            <p>From creative training to corporate development and event branding, Ankh delivers diverse services to inspire, educate, and empower.</p>
+        </header>
+
+        <div class="slider-component">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <!-- Service Card 1 -->
+                    <article class="service-card">
+                        <img src="assets/img/s4.png" alt="Film making concept">
+                        <div class="card-content">
+                            <h3>Film Making & Acting</h3>
+                            <p>Learn everything from scriptwriting to post-production, acting techniques, and directing.</p>
+                        </div>
+                    </article>
+                    <!-- Service Card 2 -->
+                    <article class="service-card">
+                        <img src="assets/img/s3.png" alt="A person posing">
+                        <div class="card-content">
+                            <h3>Modeling & Self-Care</h3>
+                            <p>Train in posing, presentation, and self-development with expert models and life coaches.</p>
+                        </div>
+                    </article>
+                    <!-- Service Card 3 -->
+                    <article class="service-card">
+                        <img src="assets/img/s2.png" alt="A modern building">
+                        <div class="card-content">
+                            <h3>Beauty & Film Makeup</h3>
+                            <p>Nail beauty, eyelash work, and cinematic makeup taught by top professionals.</p>
+                        </div>
+                    </article>
+                    <!-- Service Card 4 -->
+                    <article class="service-card">
+                        <img src="assets/img/s1.png" alt="Inspirational signs">
+                        <div class="card-content">
+                            <h3>Personal Development</h3>
+                            <p>Understand mindset, behavior, and inner strength for personal and professional growth.</p>
+                        </div>
+                    </article>
+                    <!-- Service Card 5 -->
+                    <article class="service-card">
+                        <img src="assets/img/s4.png" alt="A red sports car">
+                        <div class="card-content">
+                            <h3>Sales & Marketing</h3>
+                            <p>Build a powerful sales mindset and learn strategies to close deals effectively.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button id="prev-btn" class="nav-btn" aria-label="Previous Slide">←</button>
+                <button id="next-btn" class="nav-btn" aria-label="Next Slide">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Events & Promotion Services -->
+    <section class="events-promotion-section">
+        <div class="promo-image-slider">
+            <div class="promo-slides">
+                <img src="assets/img/c4.png" alt="A group of people attending an event" class="promo-slide active">
+                <img src="assets/img/c3.png" alt="A conference setting" class="promo-slide">
+                <img src="assets/img/c2.png" alt="A vibrant concert scene" class="promo-slide">
+            </div>
+            <div class="promo-dots"></div>
+        </div>
+        <div class="promo-content">
+            <header class="section-header">
+                <h2>Events & Promotion Services</h2>
+                <p>From creative training to corporate development and event branding, Ankh delivers diverse services to inspire, educate, and empower.</p>
+            </header>
+            <div class="promo-list">
+                <h4>Event Planning & Coordination</h4>
+                <h4>Digital Marketing & Advertising</h4>
+                <h4>Printing & Branding</h4>
+                <h4>Promotional Video Editing</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Digital Magazine Publishing -->
+    <section class="magazine-section">
+        <header class="section-header">
+            <h2>Digital Magazine Publishing</h2>
+            <p>We provide free digital magazines with educational and entertaining content. Available in blog and EPUB format to inspire today's readers.</p>
+        </header>
+        <div class="magazine-grid">
+            <!-- Data attributes power the modal -->
+            <article class="magazine-cover" data-title="Selfie: A New Era" data-issue="Vol. 1, No. 1" data-description="An introspective look at the self-portrait in the digital age.">
+                <img src="assets/img/m1.png" alt="Magazine cover with the word Selfie">
+                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+            </article>
+            <article class="magazine-cover" data-title="Yellow Haze" data-issue="Vol. 1, No. 2" data-description="A special on brutalist design and the power of monochrome with a splash of color.">
+                <img src="assets/img/m2.png" alt="Yellow magazine cover">
+                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+            </article>
+            <article class="magazine-cover" data-title="La Photo a Rio" data-issue="Vol. 1, No. 3" data-description="A photojournalism feature showcasing the vibrant life and colors of Rio de Janeiro.">
+                <img src="assets/img/m3.png" alt="Red magazine cover">
+                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+            </article>
+        </div>
+        <div class="button-container">
+            <a href="#" class="explore-btn">Explore Magazines</a>
+        </div>
+    </section>
+
+    <!-- Section 4: Referral Program CTA -->
+    <section class="cta-card">
+        <h2>Referral & Ambassador Program</h2>
+        <p>Join our growing community by referring students. Earn up to 20% commission on each successful registration depending on the course.</p>
+        <a href="#" class="cta-btn">Join Now</a>
+    </section>
+</div>
+
+<!-- The Magazine Modal -->
+<div id="magazine-modal" class="modal-overlay">
+    <div class="modal-layout">
+        <button class="close-modal">×</button>
+        <div class="modal-image-container">
+            <img id="modal-image" src="" alt="Magazine Cover">
+        </div>
+        <div class="modal-info">
+            <h2 id="modal-title"></h2>
+            <span id="modal-issue"></span>
+            <p id="modal-description"></p>
+            <a href="#" id="read-now-btn" target="_blank" rel="noopener noreferrer">Read Now</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/js/services.js"></script>
+<script src="components.js"></script>
+
+</body>
+</html>

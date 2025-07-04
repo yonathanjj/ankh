@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh Footer</title>
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- GSAP for animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        /* --- General Setup --- */
+        :root {
+            --header-font: 'Times New Roman', Times, serif;
+            --body-font: 'Lora', serif;
+            --footer-bg: #E9C43B; /* The primary yellow color */
+            --footer-text: #2c2c2c;
+            --button-bg: #1f2029;
+            --button-text: #ffffff;
+            --input-bg: #ffffff;
+        }
+
+        /* --- Main Footer Container --- */
+        .footer-wrapper {
+            font-family: var(--body-font);
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            width: 95%; /* CORE REQUIREMENT */
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 15px; /* CORE REQUIREMENT */
+        }
+
+        /* --- Newsletter Section (Top Part) --- */
+        .newsletter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.2);
+        }
+
+        .newsletter-section h3 {
+            font-family: var(--header-font);
+            font-size: 1.8rem;
+            font-weight: normal;
+            flex-shrink: 0;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            border: none;
+            background-color: var(--input-bg);
+            padding: 1rem;
+            border-radius: 16px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #999;
+        }
+
+        .newsletter-form button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Main Footer Content (Bottom Part) --- */
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(4, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .footer-logo img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .footer-links h4 {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 1200px) {
+            .newsletter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr; /* 2 columns for links */
+                gap: 2.5rem;
+            }
+            .footer-logo {
+                grid-column: 1 / -1; /* Make logo span full width */
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-wrapper { padding: 2rem; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body style="background-color: #fffdf5;"> <!-- Added body color for standalone viewing -->
+
+<footer class="footer-wrapper">
+
+    <div class="newsletter-section">
+        <h3>Sign up for our weekly<br>email news letter</h3>
+        <form action="#" class="newsletter-form">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="footer-content">
+        <div class="footer-logo">
+            <!-- IMPORTANT: Replace "logo.png" with your actual logo file -->
+            <img src="assets/img/logo.png" alt="Ankh Logo">
+        </div>
+
+        <div class="footer-links links-quick">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Magazine</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">ERP Login</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links links-courses">
+            <h4>Courses</h4>
+            <ul>
+                <li><a href="#">Makeup School</a></li>
+                <li><a href="#">Modeling School</a></li>
+                <li><a href="#">Acting School</a></li>
+                <li><a href="#">Course Catalog</a></li>
+                <li><a href="#">Referral Program</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links links-legal">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Refund Policy</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links links-connect">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        gsap.from('.footer-wrapper', {
+            duration: 1.2,
+            opacity: 0,
+            y: 50,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.footer-wrapper',
+                start: 'top 95%',
+                toggleActions: 'play none none none'
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

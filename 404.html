@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <!-- GSAP CDN for animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    /* --- General Setup & Variables --- */
+    :root {
+        --header-font: 'Times New Roman', Times, serif;
+        --body-font: 'Lora', serif;
+        --text-color: #2c2c2c;
+        --button-bg: #F4C430;
+        --gradient-start: #ffffff;
+        --gradient-end: #fffbf0;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        font-family: var(--header-font);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: linear-gradient(to bottom right, var(--gradient-start), var(--gradient-end));
+        color: var(--text-color);
+        overflow: hidden; /* Prevents scrollbars from appearing during animation */
+    }
+
+    /* --- Main Container --- */
+    .container {
+        padding: 2rem;
+    }
+
+    /* --- Error Message Text --- */
+    .error-message {
+        font-size: clamp(1.2rem, 3vw, 1.5rem); /* Responsive font size */
+        margin-bottom: 2rem;
+        opacity: 0; /* Initially hidden for animation */
+    }
+
+    /* --- 404 Code --- */
+    .error-code {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: clamp(10rem, 35vw, 25rem); /* Hugely responsive font size */
+        font-weight: 600;
+        line-height: 1;
+        opacity: 0; /* Initially hidden for animation */
+    }
+
+    .error-code .zero-logo {
+        /* This makes the logo scale with the font size */
+        height: 0.7em;
+        width: auto;
+        margin: 0 0.05em; /* Small space between numbers and logo */
+    }
+
+    /* --- Go Home Button --- */
+    .home-btn {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.8rem 2.5rem;
+        background-color: var(--button-bg);
+        color: var(--text-color);
+        border-radius: 50px;
+        text-decoration: none;
+        font-family: var(--body-font);
+        font-size: 1rem;
+        font-weight: bold;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0; /* Initially hidden for animation */
+    }
+
+    .home-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <p class="error-message">We're very sorry the page your looking for does not exist</p>
+
+  <div class="error-code">
+    <span>4</span>
+    <!-- IMPORTANT: Replace "logo.png" with the path to your actual logo image -->
+    <img src="assets/img/logo.png" alt="Ankh logo representing the number zero" class="zero-logo">
+    <span>4</span>
+  </div>
+
+  <a href="/" class="home-btn">Go Home</a>
+</div>
+
+<script>
+  // GSAP Animation on page load
+  document.addEventListener('DOMContentLoaded', () => {
+
+      // Create a timeline for a sequence of animations
+      const tl = gsap.timeline();
+
+      // Animate the elements with a stagger effect
+      tl.to('.error-message, .error-code, .home-btn', {
+          duration: 1,      // Animation duration of 1 second
+          opacity: 1,       // Fade in to full opacity
+          y: -20,           // Move up 20 pixels
+          stagger: 0.2,     // 0.2 seconds delay between each element
+          ease: "power3.out" // A smooth easing effect
+      });
+
+  });
+</script>
+
+</body>
+</html>

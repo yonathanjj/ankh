@@ -1,0 +1,361 @@
+/* --- General Setup & Variables --- */
+:root {
+    --header-font: 'Times New Roman', Times, serif;
+    --body-font: 'Lora', serif;
+    --text-color: #2c2c2c;
+    --light-text: #555;
+    --background-color: #fffdf5;
+    --brand-yellow: #f4c430; /* We will use this for the gradient! */
+    --border-color: #ddd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    /* Changed to transparent to let the pseudo-element background show through */
+    background-color: transparent;
+    color: var(--text-color);
+    /* Added these for the effect to work properly */
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- The Animated Gradient Background --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind all page content */
+
+    /* 1. The solid background color */
+    background-color: var(--background-color);
+
+    /* 2. The two blurry radial gradients */
+    /* We use RGBA to make the color from --brand-yellow semi-transparent. */
+    /* #f4c430 is equivalent to rgb(244, 196, 48) */
+    background-image:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(244, 196, 48, 0.4),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(244, 196, 48, 0.3),
+            transparent 50%
+        );
+
+    /* 3. Apply the animation */
+    animation: moveGradient 30s ease-in-out infinite;
+}
+
+/* --- Keyframes for the Animation --- */
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 0%, 100% 100%;
+    }
+    25% {
+        background-position: 20% 80%, 80% 20%;
+    }
+    50% {
+        background-position: 100% 100%, 0% 0%;
+    }
+    75% {
+        background-position: 80% 20%, 20% 80%;
+    }
+    100% {
+        background-position: 0% 0%, 100% 100%;
+    }
+}
+
+.page-wrapper {
+    width: 95%; /* CORE REQUIREMENT */
+    margin: 0 auto;
+}
+
+/* --- Shared Styles --- */
+/* MODIFIED: Header is now left-aligned */
+.section-header {
+    text-align: left;
+    margin-bottom: 3rem;
+}
+.section-header h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+.section-header p { font-size: 1.1rem; line-height: 1.6; color: var(--light-text); max-width: 60ch; }
+
+/* --- Courses Section --- */
+.courses-section { padding: 5rem 0; }
+/* MODIFIED: Layout has vertical divider logic */
+.courses-layout {
+    display: flex;
+    gap: 3rem;
+}
+.filters-sidebar {
+    flex: 0 0 250px;
+    border-right: 1px solid var(--border-color);
+    padding-right: 3rem;
+}
+.courses-main {
+    flex: 1;
+    text-align: left;
+}
+
+/* --- Filters Sidebar --- */
+.filters-sidebar h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+.filter-buttons { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.filter-btn {
+    background-color: transparent; border: 1px solid #000000;
+    padding: 0.6rem 1.5rem; border-radius: 50px; font-family: var(--body-font);
+    font-size: 1rem; cursor: pointer; transition: all 0.3s ease;
+}
+.filter-btn.active, .filter-btn:hover { background-color: var(--brand-yellow); border-color: var(--brand-yellow); }
+
+/* --- Courses Grid --- */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+/* MODIFIED: Increased card height */
+.course-card {
+    background: #fff; border-radius: 16px;
+    border: 1px solid var(--border-color); overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 520px; /* Ensures all cards have a generous, consistent height */
+}
+.course-card img { width: 100%; height: 220px; object-fit: cover; }
+.card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+.card-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.card-content p { color: var(--light-text); line-height: 1.5; margin-bottom: 1rem; }
+.card-content .learn-more-btn {
+    margin-top: auto; align-self: flex-start;
+    background: #fff; border: 1px solid var(--text-color);
+    padding: 0.7rem 2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s ease;
+}
+.card-content .learn-more-btn:hover { background: var(--text-color); color: #fff; }
+#load-more-btn {
+    background-color: var(--brand-yellow); padding: 1rem 3rem;
+    border-radius: 50px; border: none; font-size: 1.1rem; cursor: pointer;
+}
+
+/* --- General Variables (assuming they are in your main CSS) --- */
+:root {
+    --header-font: 'Times New Roman', Times, serif;
+    --body-font: 'Lora', serif;
+    --text-color: #2c2c2c;
+    --light-text: #555;
+    --brand-yellow: #f4c430; /* Primary brand color */
+    --brand-black: #1f2029; /* Primary dark color */
+    --border-color: #e8e8e8;
+    --card-bg: #ffffff;
+
+    /* MODIFIED: New color variables for the bars */
+    --commission-bar-bg: rgba(244, 196, 48, 0.2);  /* Lighter yellow/orange */
+    --commission-bar-text: #9d7c10;
+    --remarks-bar-bg: rgba(44, 44, 44, 0.1);    /* Lighter black/grey */
+    --remarks-bar-text: #333333;
+}
+
+/* --- Referral Section --- */
+.referral-section {
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.referral-section h2 {
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+    font-family: var(--header-font);
+}
+
+.referral-chart-container {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* --- Chart Grid Structure --- */
+.chart-header,
+.chart-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.chart-header {
+    font-family: var(--header-font);
+    font-size: 1.1rem;
+    color: var(--light-text);
+    padding: 0 1rem 1rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chart-row {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.chart-row:last-of-type {
+    border-bottom: none;
+}
+
+.chart-row:hover {
+    background-color: #f9f9f9;
+}
+
+.course-name-cell {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+}
+
+.chart-bars-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px);
+    background-size: calc(100% / 6) 100%;
+}
+
+/* --- Data Bar Styling (MODIFIED COLORS) --- */
+.commission-bar,
+.remarks-bar {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commission-bar {
+    background-color: var(--commission-bar-bg); /* Now uses light yellow */
+    color: var(--commission-bar-text);
+}
+
+.commission-bar strong {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.remarks-bar {
+    background-color: var(--remarks-bar-bg); /* Now uses light black/grey */
+    color: var(--remarks-bar-text);
+}
+
+
+/* --- Note and Button Styling --- */
+.note {
+    color: var(--light-text);
+    max-width: 70ch;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.register-agent-btn {
+    display: inline-block;
+    background-color: var(--brand-yellow);
+    color: var(--text-color);
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.register-agent-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+    .referral-chart-container {
+        padding: 1rem;
+    }
+    .chart-header {
+        display: none;
+    }
+    .chart-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .course-name-cell {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .chart-bars-cell {
+        background-image: none;
+    }
+    .commission-bar, .remarks-bar {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* --- Course Modal --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(30, 30, 30, 0.7); backdrop-filter: blur(8px);
+    z-index: 1000; display: none; place-items: center; padding: 2rem;
+}
+.modal-content {
+    background: #fff; border-radius: 16px;
+    width: 100%; max-width: 1200px; max-height: 95vh;
+    padding: 3rem; overflow-y: auto; position: relative;
+}
+.close-modal {
+    position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none;
+    font-size: 2.5rem; color: #999; cursor: pointer; line-height: 1;
+}
+#modal-title { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+#modal-description { font-size: 1.1rem; line-height: 1.6; color: var(--light-text); max-width: 80ch; margin-bottom: 2rem; }
+.modal-images-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem;
+}
+.modal-images-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; }
+.modal-info-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 3rem; margin-bottom: 3rem;
+}
+.info-block h4 { font-size: 1.5rem; margin-bottom: 1rem; }
+.info-block span, .info-block li { color: var(--light-text); font-size: 1.1rem; }
+.info-block span { display: block; margin-bottom: 0.25rem; }
+.info-block ul { list-style: inside; padding-left: 0.5rem; }
+.info-block li { margin-bottom: 0.5rem; }
+.register-course-btn {
+    display: block; width: fit-content; margin: 2rem auto 0 auto;
+    background-color: var(--brand-yellow);
+    color: var(--text-color); padding: 1rem 4rem; border-radius: 50px;
+    text-decoration: none; font-weight: bold;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 992px) {
+    .courses-layout { flex-direction: column; }
+    .filters-sidebar {
+        border-right: none; border-bottom: 1px solid var(--border-color);
+        padding-right: 0; padding-bottom: 2rem; margin-bottom: 2rem;
+    }
+}
+@media (max-width: 768px) {
+    .courses-grid { grid-template-columns: 1fr; }
+    .course-card { min-height: auto; }
+    .section-header { text-align: center; }
+    .section-header p { margin: 0 auto; }
+    .modal-images-grid, .modal-info-grid { grid-template-columns: 1fr; }
+    .modal-content { padding: 4rem 1.5rem 2rem 1.5rem; } /* Extra top padding for close button space */
+}

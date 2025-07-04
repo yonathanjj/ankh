@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh - Courses</title>
+    <link rel="stylesheet" href="assets/css/courses.css">
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <section class="courses-section">
+        <header class="section-header">
+            <h2>Creative, Practical &<br>Empowering Courses</h2>
+            <p>Our training programs are built to equip you with real-world skills through a development-focused approach.</p>
+        </header>
+
+        <div class="courses-layout">
+            <aside class="filters-sidebar">
+                <h3>Main Courses</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="film">Film Making</button>
+                    <button class="filter-btn" data-category="makeup">Makeup</button>
+                    <button class="filter-btn" data-category="video">Video Editing</button>
+                    <button class="filter-btn" data-category="modeling">Modeling</button>
+                    <button class="filter-btn" data-category="development">Personal Development</button>
+                    <button class="filter-btn" data-category="self-care">Self-Care</button>
+                    <button class="filter-btn" data-category="sales">Sales & Marketing</button>
+                </div>
+            </aside>
+
+            <main class="courses-main">
+                <div class="courses-grid">
+                    <!-- Card 1 -->
+                    <article class="course-card" data-category="film"
+                             data-title="Film Making & Directing"
+                             data-description="This hands-on course is designed to take you from idea to final cut. You'll explore every stage of the filmmaking process, from script development and directing techniques to cinematography, lighting, editing, and marketing your finished work."
+                             data-images="assets/img/d1.png,assets/img/d2.png,assets/img/d3.png"
+                             data-duration="12 Weeks (3 Months)" data-schedule="Classes 3x per week"
+                             data-tuition="8,000 ETB total" data-tuition-includes="Includes materials and studio access"
+                             data-modules="Pre-production planning|Script writing|Directing actors|Cinematography basics|Sound and scoring|Film editing"
+                             data-benefits="Certificate of Completion|Studio project experience|One fully edited short film|Access to alumni film group">
+                        <img src="assets/img/c1.png" alt="Film Making & Directing">
+                        <div class="card-content">
+                            <h4>Film Making & Directing</h4>
+                            <p>Master the art of storytelling through film. This program covers everything from scriptwriting and directing to cinematography and post-production editing.</p>
+                            <button class="learn-more-btn">Learn more</button>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="course-card" data-category="makeup"
+                             data-title="Professional Makeup & Beauty Artistry"
+                             data-description="This intensive course for the serious makeup artist is better everyday beauty goes beyond. Our students will learn everything from how to use make up to create special effect."
+                             data-images="assets/img/d1.png,assets/img/d2.png,assets/img/d3.png"
+                             data-duration="8 Weeks (2 Months)" data-schedule="Classes 2x per week"
+                             data-tuition="6,500 ETB total" data-tuition-includes="Includes professional makeup kit"
+                             data-modules="Skincare & hygiene|Color theory|Bridal makeup|Editorial & high fashion|Special effects basics"
+                             data-benefits="Pro MUA Certificate|Portfolio photoshoot|Discounts on makeup brands|Networking opportunities">
+                        <img src="assets/img/c2.png" alt="Professional Makeup & Beauty Artistry">
+                        <div class="card-content">
+                            <h4>Professional Makeup & Beauty Artistry</h4>
+                            <p>This intensive course for the serious makeup artist is better everyday beauty goes beyond. Our program prepares you on how to do life like makeups.</p>
+                            <button class="learn-more-btn">Learn more</button>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="course-card" data-category="modeling"
+                             data-title="Modeling & Self-Presentation"
+                             data-description="Designed to build confidence and technique for aspiring models. This program includes intensive runway and industry training with real professionals."
+                             data-images="assets/img/d1.png,assets/img/d2.png,assets/img/d3.png"
+                             data-duration="6 Weeks" data-schedule="Weekend workshops"
+                             data-tuition="5,000 ETB total" data-tuition-includes="Includes professional headshots"
+                             data-modules="Runway walking|Posing techniques|Camera presence|Casting preparation|Brand representation"
+                             data-benefits="Professional Portfolio|Agency introductions|Certificate of Training|Confidence coaching">
+                        <img src="assets/img/c3.png" alt="Modeling & Self-Presentation">
+                        <div class="card-content">
+                            <h4>Modeling & Self-Presentation</h4>
+                            <p>Designed to build confidence and technique for aspiring models. This program includes intensive runway and industry training with real professionals.</p>
+                            <button class="learn-more-btn">Learn more</button>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="course-card" data-category="development"
+                             data-title="Personal Development"
+                             data-description="This life-changing course helps you understand your patterns, strengthen your mind, and learn practical strategies to elevate your mindset and daily life."
+                             data-images="assets/img/d1.png,assets/img/d2.png,assets/img/d3.png"
+                             data-duration="4 Weeks" data-schedule="Once a week evening sessions"
+                             data-tuition="4,000 ETB total" data-tuition-includes="All course materials and workbook"
+                             data-modules="Mindset mastery|Emotional intelligence|Effective communication|Goal setting & achievement|Public speaking"
+                             data-benefits="Increased Self-Awareness|Improved Relationships|Clearer Life Goals|Enhanced Confidence">
+                        <img src="assets/img/c4.png" alt="Personal Development">
+                        <div class="card-content">
+                            <h4>Personal Development</h4>
+                            <p>This life-changing course helps you understand your patterns, strengthen your mind, and learn practical strategies to elevate your mindset and daily life.</p>
+                            <button class="learn-more-btn">Learn more</button>
+                        </div>
+                    </article>
+
+                </div>
+                <button id="load-more-btn">Load more</button>
+            </main>
+        </div>
+    </section>
+
+    <!-- Referral Program Section -->
+    <section class="referral-section">
+        <h2>Referral Program</h2>
+        <div class="referral-chart-container">
+            <!-- Chart Header -->
+            <div class="chart-header">
+                <span>Course Name</span>
+                <span>Commission & Remarks</span>
+            </div>
+
+            <!-- Chart Rows -->
+            <div class="chart-row">
+                <div class="course-name-cell">Film Making</div>
+                <div class="chart-bars-cell">
+                    <div class="commission-bar" style="width: 40%; margin-left: 0;">
+                        <span>Referral Commission</span>
+                        <strong>20%</strong>
+                    </div>
+                    <div class="remarks-bar" style="width: 55%; margin-left: 5%;">
+                        <span>High-demand creative program</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="course-name-cell">Makeup</div>
+                <div class="chart-bars-cell">
+                    <div class="commission-bar" style="width: 35%; margin-left: 10%;">
+                        <span>Referral Commission</span>
+                        <strong>15%</strong>
+                    </div>
+                    <div class="remarks-bar" style="width: 60%; margin-left: 15%;">
+                        <span>Includes beauty & film makeup</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="course-name-cell">Modeling</div>
+                <div class="chart-bars-cell">
+                    <div class="commission-bar" style="width: 40%; margin-left: 5%;">
+                        <span>Referral Commission</span>
+                        <strong>20%</strong>
+                    </div>
+                    <div class="remarks-bar" style="width: 65%; margin-left: 10%;">
+                        <span>Covers fashion, commercial & runway</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="course-name-cell">Graphic Design</div>
+                <div class="chart-bars-cell">
+                    <div class="commission-bar" style="width: 35%; margin-left: 0;">
+                        <span>Referral Commission</span>
+                        <strong>15%</strong>
+                    </div>
+                    <div class="remarks-bar" style="width: 70%; margin-left: 5%;">
+                        <span>Includes tools like Photoshop & Illustrator</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="course-name-cell">Sales & Marketing</div>
+                <div class="chart-bars-cell">
+                    <div class="commission-bar" style="width: 35%; margin-left: 15%;">
+                        <span>Referral Commission</span>
+                        <strong>15%</strong>
+                    </div>
+                    <div class="remarks-bar" style="width: 60%; margin-left: 20%;">
+                        <span>Includes mindset & customer strategy</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <p class="note">Note. The referral bonus is paid after the referred student completes registration and payment. Payouts are processed monthly.</p>
+        <a href="#" class="register-agent-btn">Register as a referral agent</a>
+    </section>
+</div>
+
+<!-- The Pop-up Modal -->
+<div id="course-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal">×</button>
+        <h1 id="modal-title"></h1>
+        <p id="modal-description"></p>
+        <div id="modal-images-grid" class="modal-images-grid"></div>
+        <div class="modal-info-grid">
+            <div class="info-block">
+                <h4>Duration</h4>
+                <span id="modal-duration"></span>
+                <span id="modal-schedule"></span>
+            </div>
+            <div class="info-block">
+                <h4>Tuition</h4>
+                <span id="modal-tuition"></span>
+                <span id="modal-tuition-includes"></span>
+            </div>
+            <div class="info-block">
+                <h4>Modules Covered</h4>
+                <ul id="modal-modules"></ul>
+            </div>
+            <div class="info-block">
+                <h4>What You'll Get</h4>
+                <ul id="modal-benefits"></ul>
+            </div>
+        </div>
+        <a href="#" class="register-course-btn">Register</a>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/js/courses.js"></script>
+<script src="components.js"></script>
+
+</body>
+</html>

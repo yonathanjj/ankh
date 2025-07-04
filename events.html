@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh - Events</title>
+    <link rel="stylesheet" href="assets/css/events.css">
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <header class="page-header">
+        <h1>Experience the Ankh Spirit<br>Live</h1>
+        <p>Workshops, shows, and creative gatherings that bring our mission to life.</p>
+    </header>
+
+    <main>
+        <!-- Upcoming Events Section -->
+        <section class="events-section">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <div class="filters">
+                    <div class="sort-by">
+                        <label for="sort">Event type</label>
+                        <select name="sort" id="sort">
+                            <option value="all">sort by</option>
+                            <option value="workshops">Workshops</option>
+                            <option value="shows">Shows</option>
+                            <option value="talks">Talks</option>
+                        </select>
+                    </div>
+                    <input type="search" id="search-input" placeholder="Search events...">
+                </div>
+            </div>
+
+            <div id="event-list" class="event-list">
+                <!-- Event Item 1 (Image Left) -->
+                <article class="event-item" data-title="The Art of Expression: Film & Performance Showcase" data-image="images/event-1.jpg"
+                         data-description="A vibrant evening of short films and live performances by Ankh's film and acting students. Join us to celebrate their creativity, passion, and hard work on the big stage."
+                         data-date="August 17, 2025" data-time="6:00 PM - 9:00 PM" data-location="Ankh Studio Theater, Bole, Addis Ababa">
+                    <div class="event-image">
+                        <img src="assets/img/e1.png" alt="A conference or workshop gathering">
+                        <div class="more-info-overlay"><button>More Info</button></div>
+                    </div>
+                    <div class="event-details">
+                        <h3>The Art of Expression: Film & Performance Showcase</h3>
+                        <p>A vibrant evening of short films and live performances by Ankh's film and acting students.</p>
+                        <div class="meta-info">
+                            <span>Date: August 17, 2025</span>
+                            <span>Time: 6:00 PM – 9:00 PM</span>
+                            <span>Location: Ankh Studio Theater, Bole, Addis Ababa</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- Event Item 2 (Image Right - ADDED 'reverse' class) -->
+                <article class="event-item reverse" data-title="Beauty Beyond Makeup: Live Demo & Talk" data-image="images/event-2.jpg"
+                         data-description="An interactive session featuring live makeup demos, skincare tips, and a panel with industry pros. Learn the latest techniques and get your questions answered by the experts."
+                         data-date="July 27, 2025" data-time="6:00 PM - 9:00 PM" data-location="Bole Event Hub, Addis Ababa">
+                    <div class="event-image">
+                        <img src="assets/img/e2.png" alt="A talk or panel discussion in a warm, rustic venue">
+                        <div class="more-info-overlay"><button>More Info</button></div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Beauty Beyond Makeup: Live Demo & Talk</h3>
+                        <p>An interactive session featuring live makeup demos, skincare tips, and a panel with industry pros.</p>
+                        <div class="meta-info">
+                            <span>Date: July 27, 2025</span>
+                            <span>Time: 6:00 PM – 9:00 PM</span>
+                            <span>Location: Bole Event Hub, Addis Ababa</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Past Events Section -->
+        <section class="events-section">
+            <div class="section-header">
+                <h2>Past Events Highlights</h2>
+            </div>
+            <div class="event-list">
+
+                <!-- Past Event 2 (Image Left) -->
+                <article class="event-item" data-title="Pose Perfect: Modeling Bootcamp & Portfolio Day" data-image="images/event-4.jpg"
+                         data-description="A one-day intensive workshop covering runway techniques, camera presence, and a free portfolio shoot. This event gave aspiring models the tools and confidence to kickstart their careers."
+                         data-date="September 10, 2025" data-time="6:00 PM - 9:00 PM" data-location="Ankh Studio A, Lideta, Addis Ababa">
+                    <div class="event-image">
+                        <img src="assets/img/e2.png" alt="A panel discussion on a stage with a large screen">
+                        <div class="more-info-overlay"><button>More Info</button></div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Pose Perfect: Modeling Bootcamp & Portfolio Day</h3>
+                        <p>A one-day intensive workshop covering runway techniques, camera presence, and a free portfolio shoot.</p>
+                        <div class="meta-info">
+                            <span>Date: September 10, 2025</span>
+                            <span>Time: 6:00 PM – 9:00 PM</span>
+                            <span>Location: Ankh Studio A, Lideta, Addis Ababa</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Past Event 1 (Image Right) -->
+                <article class="event-item reverse" data-title="Mindset Mastery: Personal Growth Workshop" data-image="images/event-4.jpg"
+                         data-description="A full-day workshop on confidence, productivity, and transforming your mindset for success. Attendees left with actionable strategies to elevate their personal and professional lives."
+                         data-date="September 10, 2025" data-time="9:00 AM - 5:00 PM" data-location="Skylight Conference Hub, Bole, Addis Ababa">
+                    <div class="event-image">
+                        <img src="assets/img/e3.png" alt="A panel discussion on a stage with a large screen">
+                        <div class="more-info-overlay"><button>More Info</button></div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Mindset Mastery: Personal Growth Workshop</h3>
+                        <p>A full-day workshop on confidence, productivity, and transforming your mindset for success.</p>
+                        <div class="meta-info">
+                            <span>Date: September 10, 2025</span>
+                            <span>Location: Skylight Conference Hub, Bole, Addis Ababa</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Call to Action Card -->
+        <section class="cta-card">
+            <h2>Partner With Ankh<br>Let's Create Impact Together</h2>
+            <p>We're always looking to collaborate with passionate individuals and visionary brands. Whether you're a potential sponsor, volunteer, or creative partner, your support helps us empower communities through art, education, and innovation. Let's build something meaningful together.</p>
+            <a href="#" class="cta-btn">Become a Partner</a>
+        </section>
+    </main>
+</div>
+
+<!-- The Modal -->
+<div id="event-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal">×</button>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+        <div id="modal-details" class="meta-info"></div>
+        <form id="notification-form" class="notification-form">
+            <p>Be the first to know about tickets and updates!</p>
+            <div class="form-group">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Notify Me</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="assets/js/events.js"></script>
+<script src="components.js"></script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+/* --- General Setup & Variables --- */
+:root {
+    --header-font: 'Times New Roman', Times, serif;
+    --body-font: 'Lora', serif;
+    --text-color: #2c2c2c;
+    --light-text: #555;
+    --background-color: #fffdf5;
+    --cta-bg: #1f2029;
+    --cta-btn-bg: #f4c430;
+    --border-color: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: transparent;
+    color: var(--text-color);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- The Animated Gradient Background --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--background-color);
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(244, 196, 48, 0.4), transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(244, 196, 48, 0.3), transparent 50%);
+    animation: moveGradient 30s ease-in-out infinite;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 0%, 100% 100%; }
+    25% { background-position: 20% 80%, 80% 20%; }
+    50% { background-position: 100% 100%, 0% 0%; }
+    75% { background-position: 80% 20%, 20% 80%; }
+    100% { background-position: 0% 0%, 100% 100%; }
+}
+
+.page-wrapper {
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Headers & Typography --- */
+.page-header { padding: 5rem 0; margin: 0 auto; }
+.page-header h1 {
+    /* CHANGE: Increased clamp values for a larger heading */
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.2;
+    text-align: right;
+}
+.page-header p {
+    /* CHANGE: Increased paragraph font size */
+    font-size: 1.3rem;
+    color: var(--light-text);
+    margin-top: 1rem;
+    text-align: left;
+    max-width: 50ch;
+}
+.section-header h2 {
+    /* CHANGE: Increased section heading size */
+    font-size: 2.8rem;
+}
+
+/* --- Events Section & Filters --- */
+.events-section { margin-bottom: 5rem; }
+.events-section + .events-section {
+    padding-top: 5rem;
+    border-top: 1px solid var(--border-color);
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.filters { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+select, #search-input {
+    font-family: var(--body-font);
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background-color: transparent;
+    /* CHANGE: Slightly larger font for better usability */
+    font-size: 1.05rem;
+}
+select {
+    appearance: none; padding-right: 3rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em;
+}
+
+/* --- Event List & Items --- */
+.event-list { display: flex; flex-direction: column; gap: 3rem; }
+.event-item {
+    display: flex; gap: 3rem; align-items: center;
+    padding-bottom: 3rem; border-bottom: 1px solid var(--border-color);
+}
+.event-item:last-of-type { border-bottom: none; }
+.event-item.reverse { flex-direction: row-reverse; }
+.event-image {
+    flex: 0 0 40%; position: relative; border-radius: 16px;
+    overflow: hidden; cursor: pointer;
+}
+.event-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.more-info-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s ease;
+}
+.event-image:hover .more-info-overlay { opacity: 1; }
+.more-info-overlay button {
+    font-family: var(--body-font); background: rgba(0,0,0,0.7); color: white;
+    border: 1px solid white; padding: 1rem 2.5rem; border-radius: 50px;
+    /* CHANGE: Slightly larger button text */
+    font-size: 1.15rem;
+    cursor: pointer; transform: scale(0.9); transition: transform 0.3s ease;
+}
+.event-image:hover .more-info-overlay button { transform: scale(1); }
+.event-details { flex: 1; }
+.event-details h3 {
+    /* CHANGE: Larger event title */
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.event-details p {
+    color: var(--light-text);
+    line-height: 1.6;
+    /* CHANGE: Larger event description text */
+    font-size: 1.2rem;
+}
+.meta-info {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #777;
+    /* CHANGE: Explicitly set font size for metadata */
+    font-size: 1rem;
+}
+
+/* --- CTA Card --- */
+.cta-card {
+    background-color: var(--cta-bg); color: #fff;
+    padding: 4rem; margin: 5rem 0;
+    text-align: center; border-radius: 15px;
+}
+.cta-card h2 {
+    /* CHANGE: Increased clamp values for a larger heading */
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+.cta-card p {
+    color: #ccc;
+    line-height: 1.7;
+    /* CHANGE: Larger paragraph text in CTA */
+    font-size: 1.2rem;
+    margin: 0 auto 2.5rem auto;
+    max-width: 65ch;
+}
+.cta-btn {
+    display: inline-block; background-color: var(--cta-btn-bg); color: var(--text-color);
+    padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold;
+    transition: transform 0.3s ease;
+    /* CHANGE: Added explicit font size for consistency */
+    font-size: 1.1rem;
+}
+.cta-btn:hover { transform: scale(1.05); }
+
+/* --- Modal --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(8px);
+    z-index: 1000; display: none; place-items: center; padding: 1rem;
+}
+.modal-content {
+    background: var(--background-color); border-radius: 16px;
+    max-width: 600px; width: 100%; padding: 3rem;
+    position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.close-modal {
+    position: absolute; top: 15px; right: 15px; background: none; border: none;
+    font-size: 2rem; color: #999; cursor: pointer;
+}
+#modal-title {
+    /* CHANGE: Larger modal title */
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+#modal-description {
+    /* CHANGE: Larger modal description text */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--light-text);
+}
+#modal-details { margin: 1.5rem 0; padding: 1.5rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.notification-form p {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    /* CHANGE: Larger text for the form prompt */
+    font-size: 1.1rem;
+}
+.notification-form .form-group { display: flex; }
+.notification-form input {
+    flex-grow: 1; border: 1px solid #ccc; padding: 0.75rem;
+    border-radius: 8px 0 0 8px;
+    /* CHANGE: Larger font size in form input */
+    font-size: 1.05rem;
+}
+.notification-form button {
+    background-color: var(--text-color); color: white; border: none; padding: 0.75rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    /* CHANGE: Larger font size in form button */
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 992px) {
+    .event-item, .event-item.reverse { flex-direction: column; }
+}
+@media (max-width: 768px) {
+    .page-header h1, .page-header p { text-align: center; max-width: 100%; }
+    .section-header { flex-direction: column; align-items: stretch; gap: 1rem; }
+    .filters { flex-direction: column; align-items: stretch; }
+    .cta-card { padding: 3rem 1.5rem; }
+
+    /* Modal Responsiveness Fixes */
+    .modal-content { padding: 2rem; }
+    #modal-title {
+        /* CHANGE: Scaled up the responsive modal title as well */
+        font-size: 2rem;
+    }
+    .notification-form .form-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .notification-form input, .notification-form button {
+        border-radius: 8px;
+    }
+}

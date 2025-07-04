@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh - Magazine Library</title>
+    <link rel="stylesheet" href="assets/css/magzine.css">
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <!-- MODIFIED Hero Section -->
+    <header class="hero-header">
+        <div class="hero-image-container">
+            <img src="assets/img/mh1.png" alt="Illustrated scene of people reading in nature">
+            <!-- The title is now inside this container to overlay the image -->
+            <h1>Digital Magazine Library</h1>
+        </div>
+    </header>
+
+    <div class="library-layout">
+        <!-- Left Sidebar for Filters -->
+        <aside class="filters-sidebar">
+            <h2>Eixarcolant Products</h2>
+            <input type="search" id="search-input" placeholder="Search...">
+            <h3>Category</h3>
+            <ul class="category-filters">
+                <li><label><input type="checkbox" name="category" value="monthly"> Monthly Edition</label></li>
+                <li><label><input type="checkbox" name="category" value="special"> Special Edition</label></li>
+                <li><label><input type="checkbox" name="category" value="zenache"> Zenache Edition</label></li>
+                <li><label><input type="checkbox" name="category" value="collection"> Collection Edition</label></li>
+            </ul>
+        </aside>
+
+        <!-- Right side for Magazine Grid -->
+        <main class="magazine-main">
+            <div class="magazine-grid">
+                <article class="magazine-cover" data-category="monthly special" data-title="Featuring Inspiration" data-issue="Vol. 11, No. 5" data-description="A deep dive into creative processes and finding your muse in the modern world." data-read-url="#">
+                    <img src="assets/img/m3.png" alt="Featuring Inspiration Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover" data-category="monthly" data-title="Sporty Youth" data-issue="Summer 2025" data-description="Exploring the intersection of street fashion, skateboarding culture, and youthful energy." data-read-url="#">
+                    <img src="assets/img/m2.png" alt="Sporty Youth Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover" data-category="zenache" data-title="23:00 to Late" data-issue="Zion Bay Issue" data-description="A visual diary of late-night cityscapes and the stories they hold after dark." data-read-url="#">
+                    <img src="assets/img/m1.png" alt="23:00 to Late Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover" data-category="collection" data-title="YOU" data-issue="Collector's Edition" data-description="A special blurred edition focusing on personal identity and introspective art." data-read-url="#">
+                    <img src="assets/img/mh1.png" alt="YOU Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover" data-category="special" data-title="Glass Effect in Figma" data-issue="Design Special" data-description="A technical guide and design showcase on creating the popular 'glassmorphism' effect." data-read-url="#">
+                    <img src="assets/img/mh2.png" alt="Glass Effect in Figma Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover" data-category="monthly special" data-title="Court Vision" data-issue="July 2025" data-description="An athletic exploration of form, movement, and the aesthetics of basketball." data-read-url="#">
+                    <img src="assets/img/m3.png" alt="Court Vision Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <!-- Items to be loaded later -->
+                <article class="magazine-cover initially-hidden" data-category="monthly" data-title="Another Monthly Issue" data-issue="Fall 2025" data-description="Exploring autumn trends and cozy lifestyles." data-read-url="#">
+                    <img src="assets/img/rw.jpg" alt="Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+                <article class="magazine-cover initially-hidden" data-category="collection" data-title="Collector's Item II" data-issue="Archive Edition" data-description="A look back at our most iconic issues." data-read-url="#">
+                    <img src="assets/img/rw.jpg" alt="Magazine Cover">
+                    <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                </article>
+            </div>
+            <button id="load-more-btn">Load more</button>
+        </main>
+    </div>
+</div>
+
+<!-- The Pop-up Modal -->
+<div id="magazine-modal" class="modal-overlay">
+    <div class="modal-layout">
+        <button class="close-modal">×</button>
+        <div class="modal-image-container"><img id="modal-image" src="" alt="Magazine Cover"></div>
+        <div class="modal-info">
+            <h2 id="modal-title"></h2>
+            <span id="modal-issue"></span>
+            <p id="modal-description"></p>
+            <a href="#" id="read-now-btn" target="_blank" rel="noopener noreferrer">Read Now</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="assets/js/magzine.js"></script>
+<script src="components.js"></script>
+
+</body>
+</html>

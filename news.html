@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankh - News</title>
+    <link rel="stylesheet" href="assets/css/news.css">
+    <!-- Google Fonts for Lora and Times New Roman -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NEW: Trailing Label Cursor -->
+<div class="cursor-container">
+    <div class="cursor-dot"></div>
+    <div class="cursor-text-label"></div>
+</div>
+
+<!-- NEW: Background Gradient Blobs -->
+<div class="background-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+</div>
+
+
+<div class="page-wrapper">
+
+    <!-- Featured News Section -->
+    <section class="news-section">
+        <div class="news-grid grid-cols-2">
+            <article class="news-post"
+                     data-title="A Grand Gathering: Our First All-Around Event"
+                     data-author="Ankh Staff"
+                     data-date="August 2, 2025"
+                     data-excerpt="The energy was incredible, bringing together creative minds from all corners of our community for a day of networking, games, and celebration."
+                     data-content="We celebrated a milestone with our first-ever all-around event, featuring guest speakers, networking opportunities, games, and an exclusive cinema screening. This event underscores our core belief: Success is our culture. We are immensely proud of what we achieved together and are already planning how to make the next event even more memorable.">
+                <img src="assets/img/n1.png" alt="Family Time event collage">
+                <div class="post-content">
+                    <h3>First ever all around event</h3>
+                    <p class="date">aug 02/05/2025</p>
+                </div>
+            </article>
+
+            <article class="news-post"
+                     data-title="Ankh Family Time: A Day to Remember"
+                     data-author="Jane Doe"
+                     data-date="August 2, 2025"
+                     data-excerpt="From insightful talks to collaborative games, the 'Ankh Family Time' event was a resounding success that strengthened our community bonds."
+                     data-content="The 'Ankh Family Time' event was a wonderful demonstration of our community's spirit. Participants enjoyed a day of collaboration, fun games, and insightful talks from guest speakers. This event strengthens our belief that success is our culture, built on shared experiences and mutual support. We can't wait for the next one!">
+                <img src="assets/img/n2.png" alt="Ankh Family Time event poster">
+                <div class="post-content">
+                    <h3>First ever all around event</h3>
+                    <p class="date">aug 02/05/2025</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <main class="news-section">
+        <h2>Latest news</h2>
+        <div class="news-grid grid-cols-3">
+            <article class="news-post" data-title="Join Our Modeling & Make-up School" data-author="Ankh Admissions" data-date="August 2, 2025" data-excerpt="Unlock your potential in the world of beauty and fashion with our new curriculum." data-content="Our Film Modeling & Make-up School is now open for enrollment. Learn from industry professionals, build your portfolio, and start your journey towards a creative career today.">
+                <img src="assets/img/n3.png" alt="Woman modeling">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+            <article class="news-post" data-title="Who Should Be Our Next Guest?" data-author="Community Team" data-date="August 2, 2025" data-excerpt="We're looking for our next guest speaker and we want to hear from you!" data-content="We value your input! Comment on our social media channels with your suggestions for inspiring individuals you'd love to hear from at our next big event. Your voice helps shape our community programming.">
+                <img src="assets/img/n4.png" alt="Next Guest poster">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+            <article class="news-post" data-title="Advanced Make-up Courses Available" data-author="Ankh Academy" data-date="August 2, 2025" data-excerpt="Take your skills to the next level with our new advanced courses." data-content="This program covers everything from editorial looks to special effects, designed for aspiring make-up artists who want to specialize and refine their craft.">
+                <img src="assets/img/n5.png" alt="Make-up school ad">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+            <article class="news-post" data-title="The Ankh Fashion Show" data-author="Events Team" data-date="August 2, 2025" data-excerpt="Prepare for a stylish afternoon celebrating emerging designers." data-content="Our upcoming fashion show will feature the latest collections from the most promising new talent in the industry. Join us for a celebration of creativity, innovation, and style. Tickets are available now.">
+                <img src="assets/img/n6.png" alt="Fashion show poster">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+            <article class="news-post" data-title="Advanced Make-up Courses Available" data-author="Ankh Academy" data-date="August 2, 2025" data-excerpt="Take your skills to the next level with our new advanced courses." data-content="This program covers everything from editorial looks to special effects, designed for aspiring make-up artists who want to specialize and refine their craft.">
+                <img src="assets/img/n7.png" alt="Make-up school ad">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+            <article class="news-post" data-title="The Ankh Fashion Show" data-author="Events Team" data-date="August 2, 2025" data-excerpt="Prepare for a stylish afternoon celebrating emerging designers." data-content="Our upcoming fashion show will feature the latest collections from the most promising new talent in the industry. Join us for a celebration of creativity, innovation, and style. Tickets are available now.">
+                <img src="assets/img/n8.png" alt="Fashion show poster">
+                <div class="post-content"><h3>First ever all around event</h3><p class="date">aug 02/05/2025</p></div>
+            </article>
+        </div>
+    </main>
+</div>
+
+<!-- The Modal (Unchanged) -->
+<div id="news-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal">×</button>
+        <img id="modal-image" src="" alt="Full size news image">
+        <div class="modal-text-content">
+            <h2 id="modal-title"></h2>
+            <div class="modal-meta">
+                <span id="modal-author"></span> | <span id="modal-date"></span>
+            </div>
+            <p id="modal-excerpt"></p>
+            <div id="modal-full-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/js/news.js"></script>
+<script src="components.js"></script>
+
+</body>
+</html>
