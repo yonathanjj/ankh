@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ankh - Magazine Library</title>
-    <link rel="stylesheet" href="assets/css/magzine.css">
-    <!-- Google Fonts for Lora and Times New Roman -->
+    <title>Magazine Library</title>
+    <!-- Your Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="assets/css/magzine.css">
 </head>
 <body>
 
+<!-- EDITED: The hero header is now OUTSIDE the page-wrapper -->
+<header class="hero-header">
+    <div class="hero-image-container">
+        <img src="assets/img/mh1.png" alt="Creative abstract background for the magazine library">
+        <h1>Magazine Library</h1>
+    </div>
+</header>
+
 <div class="page-wrapper">
-    <!-- MODIFIED Hero Section -->
-    <header class="hero-header">
-        <div class="hero-image-container">
-            <img src="assets/img/mh1.png" alt="Illustrated scene of people reading in nature">
-            <!-- The title is now inside this container to overlay the image -->
-            <h1>Digital Magazine Library</h1>
-        </div>
-    </header>
 
     <div class="library-layout">
         <!-- Left Sidebar for Filters -->
@@ -30,9 +31,9 @@
             <h3>Category</h3>
             <ul class="category-filters">
                 <li><label><input type="checkbox" name="category" value="monthly"> Monthly Edition</label></li>
-                <li><label><input type="checkbox" name="category" value="special"> Special Edition</label></li>
                 <li><label><input type="checkbox" name="category" value="zenache"> Zenache Edition</label></li>
                 <li><label><input type="checkbox" name="category" value="collection"> Collection Edition</label></li>
+                <li><label><input type="checkbox" name="category" value="special"> Special Edition</label></li>
             </ul>
         </aside>
 

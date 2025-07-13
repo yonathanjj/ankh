@@ -74,10 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Student of the Week Slider
     const studentSlider = {
+        // CORRECTED IMAGE PATHS
         data: [
-            { name: "Rahel Tadesse", image: "assets/img/student-1.jpg", course: "Film Making & Directing", achievement: "Directed her first short film in just 8 weeks.", quote: "I never thought I'd have the confidence or the tools to create something meaningful. Ankh gave me both — and more.", instagram: "https://www.instagram.com/" },
-            { name: "Daniel Abebe", image: "assets/img/student-2.jpg", course: "Advanced Makeup Artistry", achievement: "Booked as lead makeup artist for a major fashion show.", quote: "The hands-on practice was incredible. I went from novice to professional in one course.", instagram: "https://www.instagram.com/" },
-            { name: "Hana Girma", image: "assets/img/student-3.jpg", course: "Modeling & Self-Presentation", achievement: "Signed with a top modeling agency.", quote: "Ankh taught me more than just how to walk; they taught me how to own the room.", instagram: "https://www.instagram.com/" }
+            { name: "Rahel Tadesse", image: "assets/img/student1.png", course: "Film Making & Directing", achievement: "Directed her first short film in just 8 weeks.", quote: "I never thought I'd have the confidence or the tools to create something meaningful. Ankh gave me both — and more.", instagram: "https://www.instagram.com/" },
+            { name: "Daniel Abebe", image: "assets/img/student2.png", course: "Advanced Makeup Artistry", achievement: "Booked as lead makeup artist for a major fashion show.", quote: "The hands-on practice was incredible. I went from novice to professional in one course.", instagram: "https://www.instagram.com/" },
+            { name: "Hana Girma", image: "assets/img/student3.png", course: "Modeling & Self-Presentation", achievement: "Signed with a top modeling agency.", quote: "Ankh taught me more than just how to walk; they taught me how to own the room.", instagram: "https://www.instagram.com/" }
         ],
         currentIndex: 0,
         imageStack: document.querySelector('.sotw-image-stack'),
@@ -98,15 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
             this.nameEl.textContent = student.name;
             this.courseEl.textContent = student.course;
             this.achievementEl.textContent = student.achievement;
-            this.quoteEl.textContent = `"${student.quote}"`;
+            // Update quote without adding extra quotes if they exist
+            this.quoteEl.textContent = student.quote.startsWith('"') ? student.quote : `"${student.quote}"`;
             this.instagramLink.href = student.instagram;
 
             const images = this.imageStack.querySelectorAll('.slide-image');
             images.forEach((img, index) => {
                 img.classList.remove('active', 'prev', 'next');
                 if (index === this.currentIndex) img.classList.add('active');
-                else if (index === (this.currentIndex - 1 + this.data.length) % this.data.length) img.classList.add('prev');
-                else if (index === (this.currentIndex + 1) % this.data.length) img.classList.add('next');
+                else if (index === (this.currentIndex - 1 + images.length) % images.length) img.classList.add('prev');
+                else if (index === (this.currentIndex + 1) % images.length) img.classList.add('next');
             });
         },
         goNext() {
@@ -122,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- SETUP EVENT LISTENERS ---
     function setupEventListeners() {
-        // Universal Card & Event Item Click Listeners
         document.body.addEventListener('click', (e) => {
             const magazineCard = e.target.closest('.clickable-card');
             if (magazineCard) magazineModal.open(magazineCard);
@@ -131,13 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (eventItem) eventModal.open(eventItem);
         });
 
-        // Magazine Modal Close Listeners
         if(magazineModal.modalEl) {
             magazineModal.closeBtn.addEventListener('click', () => magazineModal.close());
             magazineModal.modalEl.addEventListener('click', (e) => { if (e.target === magazineModal.modalEl) magazineModal.close(); });
         }
 
-        // Event Modal Close & Form Listeners
         if(eventModal.modalEl) {
             eventModal.closeBtn.addEventListener('click', () => eventModal.close());
             eventModal.modalEl.addEventListener('click', (e) => { if (e.target === eventModal.modalEl) eventModal.close(); });
@@ -157,15 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Universal Escape Key Listener for Modals
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (magazineModal.modalEl.style.visibility === 'visible') magazineModal.close();
-                if (eventModal.modalEl.style.visibility === 'visible') eventModal.close();
+                if (magazineModal.modalEl && magazineModal.modalEl.style.visibility === 'visible') magazineModal.close();
+                if (eventModal.modalEl && eventModal.modalEl.style.visibility === 'visible') eventModal.close();
             }
         });
 
-        // Student Slider Controls
         if (studentSlider.nextBtn) studentSlider.nextBtn.addEventListener('click', () => studentSlider.goNext());
         if (studentSlider.prevBtn) studentSlider.prevBtn.addEventListener('click', () => studentSlider.goPrev());
     }
@@ -174,49 +171,35 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupScrollAnimations() {
         const animateFrom = (selector, options) => {
             gsap.from(selector, {
-                scrollTrigger: {
-                    trigger: selector,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
-                },
-                duration: 0.8,
-                opacity: 0,
-                y: 50,
-                ease: 'power2.out',
-                ...options
+                scrollTrigger: { trigger: selector, start: 'top 85%', toggleActions: 'play none none none' },
+                duration: 0.8, opacity: 0, y: 50, ease: 'power2.out', ...options
             });
         };
 
-        // Hero Section (loads on entry, not scroll)
-        gsap.timeline({ defaults: { ease: 'power3.out' } })
-            .from('.hero-text h1', { duration: 1, y: 50, opacity: 0 })
-            .from('.hero-text .subtitle', { duration: 0.8, y: 40, opacity: 0 }, '-=0.7')
-            .from('.hero-card', { duration: 1, y: 100, opacity: 0, stagger: 0.2, scale: 0.9 }, '-=0.6');
+        // NEW Hero Section Animation (on page load)
+        gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } })
+            .from('.hero-content h1', { y: 50, opacity: 0 })
+            .from('.hero-content .subtitle', { y: 40, opacity: 0 }, '-=0.7')
+            .from('.scroll-down-indicator', { y: 20, opacity: 0 }, '-=0.5');
 
         // Animate Sections on Scroll
         animateFrom('.recent-magazines-section .section-title');
-        animateFrom('.recent-magazine-grid .magazine-item', { stagger: 0.2 });
+        animateFrom('.recent-magazine-grid .magazine-item', { stagger: 0.15 });
 
         animateFrom('.services-section .section-title', { x: -50, y: 0 });
-        animateFrom('.services-section .explore-btn', { x: -50, y: 0 });
-        animateFrom('.services-section .service-item', { stagger: 0.15 });
+        animateFrom('.services-section .service-item', { stagger: 0.1 });
 
-        animateFrom('.blog-section .section-title', { x: -50, y: 0 });
-        animateFrom('.blog-section .explore-btn', { x: -50, y: 0 });
-        animateFrom('.blog-section .blog-post-item', { stagger: 0.2 });
-
-        animateFrom('.upcoming-events-section .section-title', { y: -40 });
+        animateFrom('.upcoming-events-section .section-title');
         animateFrom('.upcoming-events-section .event-item', { stagger: 0.2 });
-        animateFrom('.upcoming-events-section .learn-more-btn');
 
-        animateFrom('.testimonials-intro', { x: -50, y: 0 });
-        animateFrom('.scrolling-testimonials-wrapper', { x: 50, y: 0 });
+        animateFrom('.testimonials-intro', { x: -50, y: 0, trigger: '.testimonials-section' });
+        animateFrom('.scrolling-testimonials-wrapper', { x: 50, y: 0, trigger: '.testimonials-section' });
 
         animateFrom('.sotw-section .section-title');
         animateFrom('.sotw-slider');
         animateFrom('.sotw-content');
 
-        animateFrom('.referral-section .section-title');
+        animateFrom('.referral-section .section-title', { x: -50, y: 0 });
         animateFrom('.referral-card', { scale: 0.95 });
     }
 

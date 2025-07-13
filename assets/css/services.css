@@ -36,45 +36,6 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -1; /* Puts it behind all other content */
-
-    /* 1. The solid background color */
-    background-color: var(--background-color);
-
-    /* 2. The two blurry radial gradients */
-    /* Using the color from --cta-btn-bg: #f4c430 -> rgb(244, 196, 48) */
-    background-image:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(244, 196, 48, 0.4),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 70%,
-            rgba(244, 196, 48, 0.3),
-            transparent 50%
-        );
-
-    /* 3. Apply the animation */
-    animation: moveGradient 30s ease-in-out infinite;
-}
-
-/* --- Keyframes for the Animation --- */
-@keyframes moveGradient {
-    0% {
-        background-position: 0% 0%, 100% 100%;
-    }
-    25% {
-        background-position: 20% 80%, 80% 20%;
-    }
-    50% {
-        background-position: 100% 100%, 0% 0%;
-    }
-    75% {
-        background-position: 80% 20%, 20% 80%;
-    }
-    100% {
-        background-position: 0% 0%, 100% 100%;
-    }
 }
 
 
@@ -87,35 +48,75 @@ body::before {
 /* --- Section Headers --- */
 .section-header {
     margin-bottom: 3rem;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
-.offer-section .section-header { text-align: left; }
-.events-promotion-section .section-header { text-align: left; margin: 0 0 2rem 0; }
-.magazine-section .section-header { text-align: right; }
-.section-header h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1rem; }
-.section-header p { font-size: 1.1rem; line-height: 1.6; color: var(--light-text); }
+.offer-section .section-header {
+    text-align: left;
+}
+.section-header h2 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+}
+.section-header p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--light-text);
+}
 
 /* --- Section 1: Offer Section & Slider --- */
-.offer-section { padding: 5rem 0; }
-.slider-component { position: relative; }
-.slider-container { overflow: hidden; }
-.slider-wrapper { display: flex; position: relative; }
+.offer-section {
+    padding: 5rem 0;
+    position: relative;
+}
+
+.slider-component {
+    position: relative;
+    cursor: pointer;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.slider-wrapper {
+    display: flex;
+    position: relative;
+    white-space: nowrap;
+    padding-left: 2.5%; /* Creates edge spacing */
+}
+
 .service-card {
     position: relative;
     flex-shrink: 0;
-    width: calc((100% / 4) - 1.5rem); /* Smaller width, aims for 4 in view */
-    margin-right: 1.5rem;
+    width: calc(25% - 1rem); /* Adjusted for full-width */
+    margin-right: 1rem;
     border-radius: 16px;
     overflow: hidden;
     height: 350px;
     color: white;
 }
+
 .service-card img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
+
 .card-content {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     padding: 1.5rem;
     text-align: left;
@@ -123,38 +124,89 @@ body::before {
 }
 .card-content h3 { font-size: 1.5rem; }
 .card-content p { font-size: 1rem; line-height: 1.5; color: rgba(255,255,255,0.9); }
-.slider-nav {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-    padding-right: 1rem;
-    gap: 1rem;
-}
-.nav-btn {
-    width: 50px; height: 50px; border-radius: 50%;
-    border: 1px solid var(--border-color); background: #fff;
-    font-size: 1.5rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-.nav-btn:hover { background-color: var(--text-color); color: #fff; }
-.nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* --- Section 2: Events & Promotion --- */
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .service-card {
+        width: calc(33.333% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .service-card {
+        width: calc(100% - 1rem);
+    }
+    .slider-wrapper {
+        padding-left: 5%;
+    }
+}
+
+/* =================================================================== */
+/* --- Section: Image & Text Feature (Fully Responsive) --- */
+/* =================================================================== */
+
+/* --------------------------------------------------- */
+/* 1. Base & Desktop Styles (for screens > 768px)      */
+/* --------------------------------------------------- */
+
 .events-promotion-section {
     display: flex;
     align-items: center;
     gap: 4rem;
     padding: 5rem 0;
 }
+
 .promo-image-slider {
     flex: 1 1 45%;
     position: relative;
     height: 500px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+
+.promo-content {
+    flex: 1 1 55%;
+}
+
+/* --- Layout Control (Desktop) --- */
+
+/* A. Default Layout (Image Left) */
+.events-promotion-section .promo-image-slider {
+    order: 1;
+}
+.events-promotion-section .promo-content {
+    order: 2;
+    padding-left: 2rem;
+}
+.events-promotion-section .promo-content h2,
+.events-promotion-section .promo-content p {
+    margin-left: -1rem;
+}
+
+/* B. Reversed Layout (Text Left) */
+.events-promotion-section.layout-reversed .promo-content {
+    order: 1;
+    padding-left: 0;
+    padding-right: 2rem;
+}
+.events-promotion-section.layout-reversed .promo-image-slider {
+    order: 2;
+}
+/* This margin is applied to both, so it works here too */
+.events-promotion-section.layout-reversed .promo-content h2,
+.events-promotion-section.layout-reversed .promo-content p {
+    margin-left: -1rem;
+}
+
+
+/* --- Shared Component Styles (Desktop) --- */
 .promo-slides .promo-slide {
     width: 100%; height: 100%; object-fit: cover;
     position: absolute; top: 0; left: 0; opacity: 0;
@@ -168,70 +220,247 @@ body::before {
 }
 .promo-dot {
     width: 12px; height: 12px; border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer; transition: background-color 0.3s;
+    border: none;
 }
 .promo-dot.active { background: white; }
-.promo-content { flex: 1 1 55%; }
-.promo-list h4 {
-    font-size: 1.5rem; padding-bottom: 1rem; margin-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-.promo-list h4:last-child { border-bottom: none; }
 
-/* --- Section 3: Digital Magazines --- */
-/* (Assuming this is inside a section like ".recent-magazines-section") */
+.promo-content h2 { margin-bottom: 1rem; }
+.promo-content p { margin-bottom: 2rem; }
+.promo-list h4 {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+.promo-list h4:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+
+/* =================================================================== */
+/* 2. Mobile Responsive Styles (for screens <= 768px)                  */
+/* =================================================================== */
+@media (max-width: 768px) {
+
+    /* --- Stack columns vertically --- */
+    .events-promotion-section {
+        flex-direction: column;
+        gap: 2.5rem; /* Reduce gap for vertical stacking */
+        padding: 3rem 1rem; /* Reduce vertical padding and add horizontal */
+    }
+
+    /* --- Adjust the image slider --- */
+    .promo-image-slider {
+        /* On mobile, ensure the slider is always on top for reversed layout */
+        order: 1 !important;
+        width: 100%;
+        height: 350px; /* Reduce height for smaller screens */
+    }
+
+    /* --- Adjust the content block --- */
+    .promo-content {
+        /* On mobile, ensure the content is always second */
+        order: 2 !important;
+        width: 100%;
+        /* Reset all desktop-specific paddings */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* --- Reset desktop-specific text offsets --- */
+    .promo-content h2,
+    .promo-content p {
+        margin-left: 0; /* This is the most important reset */
+    }
+
+    /* --- Optional: Adjust typography for smaller screens --- */
+    .promo-list h4 {
+        font-size: 1.25rem;
+    }
+}
+
+
+/*
+=================================================================
+    Dark Sections - Magazine & Referral CTA
+=================================================================
+*/
+
+/* --- 1. Base Dark Section Style --- */
+.dark-section {
+    padding: 6rem 0; /* Vertical spacing */
+
+    /* The dotted black background */
+    background-color: #121212; /* A very dark grey */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+
+    /* This makes the section 100% edge-to-edge */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* This container keeps the content centered at 95% width */
+.dark-section .container {
+    width: 95%;
+    max-width: 1800px; /* Optional: Or match your .page-wrapper max-width */
+    margin: 0 auto;
+}
+
+/* --- 2. Digital Magazine Section Styles --- */
+.magazine-section .section-header {
+    text-align: left; /* Keep original alignment */
+}
+
+.magazine-section .section-header h2 {
+    color: #fff; /* White title on dark background */
+}
+
+.magazine-section .section-header p {
+    color: #ccc; /* Light grey text on dark background */
+}
+
 .magazine-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2rem; margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem; /* Increased space for the button */
 }
+
 .magazine-cover {
-    position: relative; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer;
+    position: relative;
+    border-radius: 12px; /* A softer radius */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: 1px solid #333; /* Subtle border for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.magazine-cover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
 .magazine-cover img {
     width: 100%;
+    height: 500px;
     display: block;
-    /* CHANGE: Control the height using a specific shape */
-    aspect-ratio: 4 / 3; /* This makes it a portrait that isn't excessively tall */
-    object-fit: cover;   /* CRITICAL: Ensures the image fills the new shape without distortion */
+    aspect-ratio: 4 / 5; /* A more elegant portrait shape */
+    object-fit: cover;
     transition: transform 0.4s ease, filter 0.4s ease;
 }
-.magazine-cover:hover img { transform: scale(1.05); filter: blur(4px); }
-.preview-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.4s ease;
-}
-.magazine-cover:hover .preview-overlay { opacity: 1; }
-.preview-overlay button {
-    background: var(--text-color); color: #fff; border: 1px solid #fff;
-    padding: 0.8rem 2.5rem; border-radius: 50px; font-family: var(--body-font);
-    font-size: 1rem; cursor: pointer; transform: scale(0.9); transition: transform 0.4s ease;
-}
-.magazine-cover:hover .preview-overlay button { transform: scale(1); }
-.button-container { text-align: right; }
 
-/* --- Section 4 & Modal --- */
-.explore-btn, .cta-btn {
-    display: inline-block; background-color: var(--cta-btn-bg);
-    color: var(--text-color); padding: 1rem 3rem; border-radius: 50px;
-    text-decoration: none; font-weight: bold; transition: transform 0.3s ease;
-    border: none; font-size: 1rem; cursor: pointer;
+.magazine-cover:hover img {
+    transform: scale(1.05);
+    filter: blur(4px) brightness(0.9);
 }
-.explore-btn:hover, .cta-btn:hover { transform: scale(1.05); }
-.cta-card {
-    background-color: var(--cta-bg); color: #fff; padding: 4rem;
-    margin: 5rem 0; text-align: center; border-radius: 15px;
+
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
-.cta-card h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.2; margin-bottom: 1.5rem;
+
+.magazine-cover:hover .preview-overlay {
+    opacity: 1;
 }
-.cta-card p {
-    color: #ccc; line-height: 1.7; font-size: 1.1rem;
-    margin: 0 auto 2.5rem auto; max-width: 65ch;
+
+.preview-overlay .preview-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    font-family: var(--body-font);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: transform 0.4s ease;
 }
+
+.magazine-cover:hover .preview-overlay .preview-btn {
+    transform: scale(1);
+}
+
+.magazine-section .button-container {
+    text-align: right;
+}
+
+
+/* --- 3. Referral CTA Section Styles --- */
+.referral-cta-section {
+    text-align: center;
+}
+
+.referral-cta-section h2 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.referral-cta-section p {
+    color: #ccc;
+    line-height: 1.7;
+    font-size: 1.2rem;
+    margin: 0 auto 2.5rem auto;
+    max-width: 65ch;
+}
+
+/* --- 4. Shared Button Styles for Dark Sections --- */
+.dark-section .explore-btn,
+.dark-section .cta-btn {
+    display: inline-block;
+    background-color: var(--cta-btn-bg);
+    color: var(--text-color);
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500; /* Modern weight */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.dark-section .explore-btn:hover,
+.dark-section .cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(244, 196, 48, 0.3);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .magazine-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .magazine-grid {
+        grid-template-columns: 1fr;
+    }
+    .magazine-section .section-header,
+    .referral-cta-section {
+        text-align: center;
+    }
+    .magazine-section .button-container {
+        text-align: center;
+    }
+}
+
+
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(8px);
@@ -262,16 +491,11 @@ body::before {
 /* --- Responsiveness --- */
 @media (max-width: 1200px) {
     .service-card { width: calc((100% / 3) - 1.5rem); }
-    .magazine-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 992px) {
     .service-card { width: calc((100% / 2) - 1.5rem); }
-    .events-promotion-section { flex-direction: column; }
 }
 @media (max-width: 768px) {
     .service-card { width: 85%; }
-    .magazine-grid { grid-template-columns: 1fr; }
-    .offer-section .section-header, .events-promotion-section .section-header, .magazine-section .section-header, .button-container { text-align: center; }
-    .promo-content { text-align: center;}
     .modal-layout { grid-template-columns: 1fr; text-align: center; }
 }

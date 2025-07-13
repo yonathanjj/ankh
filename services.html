@@ -12,8 +12,7 @@
 </head>
 <body>
 
-<div class="page-wrapper">
-    <!-- Section 1: What We Offer -->
+    <!-- Section 1: What We Offer (Infinite Autoplay) -->
     <section class="offer-section">
         <header class="section-header">
             <h2>What We Offer</h2>
@@ -65,69 +64,103 @@
                     </article>
                 </div>
             </div>
-            <div class="slider-nav">
-                <button id="prev-btn" class="nav-btn" aria-label="Previous Slide">←</button>
-                <button id="next-btn" class="nav-btn" aria-label="Next Slide">→</button>
-            </div>
         </div>
     </section>
 
-    <!-- Section 2: Events & Promotion Services -->
-    <section class="events-promotion-section">
-        <div class="promo-image-slider">
-            <div class="promo-slides">
-                <img src="assets/img/c4.png" alt="A group of people attending an event" class="promo-slide active">
-                <img src="assets/img/c3.png" alt="A conference setting" class="promo-slide">
-                <img src="assets/img/c2.png" alt="A vibrant concert scene" class="promo-slide">
-            </div>
-            <div class="promo-dots"></div>
-        </div>
-        <div class="promo-content">
-            <header class="section-header">
-                <h2>Events & Promotion Services</h2>
-                <p>From creative training to corporate development and event branding, Ankh delivers diverse services to inspire, educate, and empower.</p>
-            </header>
-            <div class="promo-list">
-                <h4>Event Planning & Coordination</h4>
-                <h4>Digital Marketing & Advertising</h4>
-                <h4>Printing & Branding</h4>
-                <h4>Promotional Video Editing</h4>
-            </div>
-        </div>
-    </section>
+    <div class="page-wrapper">
 
-    <!-- Section 3: Digital Magazine Publishing -->
-    <section class="magazine-section">
-        <header class="section-header">
-            <h2>Digital Magazine Publishing</h2>
-            <p>We provide free digital magazines with educational and entertaining content. Available in blog and EPUB format to inspire today's readers.</p>
-        </header>
-        <div class="magazine-grid">
-            <!-- Data attributes power the modal -->
-            <article class="magazine-cover" data-title="Selfie: A New Era" data-issue="Vol. 1, No. 1" data-description="An introspective look at the self-portrait in the digital age.">
-                <img src="assets/img/m1.png" alt="Magazine cover with the word Selfie">
-                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
-            </article>
-            <article class="magazine-cover" data-title="Yellow Haze" data-issue="Vol. 1, No. 2" data-description="A special on brutalist design and the power of monochrome with a splash of color.">
-                <img src="assets/img/m2.png" alt="Yellow magazine cover">
-                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
-            </article>
-            <article class="magazine-cover" data-title="La Photo a Rio" data-issue="Vol. 1, No. 3" data-description="A photojournalism feature showcasing the vibrant life and colors of Rio de Janeiro.">
-                <img src="assets/img/m3.png" alt="Red magazine cover">
-                <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
-            </article>
-        </div>
-        <div class="button-container">
-            <a href="#" class="explore-btn">Explore Magazines</a>
-        </div>
-    </section>
+        <!-- Section 2: Events & Promotion Services (Original) -->
+        <section class="events-promotion-section">
+            <!-- Image on the left -->
+            <div class="promo-image-slider">
+                <div class="promo-slides">
+                    <img src="assets/img/c4.png" alt="A group of people attending an event" class="promo-slide active">
+                    <img src="assets/img/c3.png" alt="A conference setting" class="promo-slide">
+                    <img src="assets/img/c2.png" alt="A vibrant concert scene" class="promo-slide">
+                </div>
+                <div class="promo-dots"></div>
+            </div>
+            <!-- Content on the right -->
+            <div class="promo-content">
+                <header class="section-header">
+                    <h2>Events & Promotion Services</h2>
+                    <p>From creative training to corporate development and event branding, Ankh delivers diverse services to inspire, educate, and empower.</p>
+                </header>
+                <div class="promo-list">
+                    <h4>Event Planning & Coordination</h4>
+                    <h4>Digital Marketing & Advertising</h4>
+                    <h4>Printing & Branding</h4>
+                    <h4>Promotional Video Editing</h4>
+                </div>
+            </div>
+        </section>
 
-    <!-- Section 4: Referral Program CTA -->
-    <section class="cta-card">
-        <h2>Referral & Ambassador Program</h2>
-        <p>Join our growing community by referring students. Earn up to 20% commission on each successful registration depending on the course.</p>
-        <a href="#" class="cta-btn">Join Now</a>
-    </section>
+        <!-- Section 3: Printing & Branding Services (New & Reversed) -->
+        <section class="events-promotion-section layout-reversed">
+            <!-- Content on the left -->
+            <div class="promo-content">
+                <header class="section-header">
+                    <h2>Printing & Branding Services</h2>
+                    <p>We create powerful brand identities and high-quality printed materials that make a lasting impression and communicate your message clearly.</p>
+                </header>
+                <div class="promo-list">
+                    <h4>Logo & Identity Design</h4>
+                    <h4>Business Cards & Stationery</h4>
+                    <h4>Brochures & Flyers</h4>
+                    <h4>Banners & Signage</h4>
+                </div>
+            </div>
+            <!-- Image on the right -->
+            <div class="promo-image-slider">
+                <div class="promo-slides">
+                    <img src="assets/img/p1.png" alt="A collection of branded stationery" class="promo-slide active">
+                    <img src="assets/img/p2.png" alt="Close-up of a high-quality brochure" class="promo-slide">
+                    <img src="assets/img/p3.png" alt="A large format banner for an event" class="promo-slide">
+                    <img src="assets/img/p4.png" alt="Designer working on a logo concept" class="promo-slide">
+                    <img src="assets/img/p5.png" alt="Stack of freshly printed business cards" class="promo-slide">
+                </div>
+                <div class="promo-dots"></div>
+            </div>
+        </section>
+
+        <!-- Section 3: Digital Magazine Publishing (NEW DARK DESIGN) -->
+        <section class="magazine-section dark-section">
+            <!-- This container holds the content at 95% width -->
+            <div class="container">
+                <header class="section-header">
+                    <h2>Digital Magazine Publishing</h2>
+                    <p>We provide free digital magazines with educational and entertaining content. Available in blog and EPUB format to inspire today's readers.</p>
+                </header>
+                <div class="magazine-grid">
+                    <!-- Data attributes power the modal -->
+                    <article class="magazine-cover" data-title="Selfie: A New Era" data-issue="Vol. 1, No. 1" data-description="An introspective look at the self-portrait in the digital age.">
+                        <img src="assets/img/m1.png" alt="Magazine cover with the word Selfie">
+                        <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                    </article>
+                    <article class="magazine-cover" data-title="Yellow Haze" data-issue="Vol. 1, No. 2" data-description="A special on brutalist design and the power of monochrome with a splash of color.">
+                        <img src="assets/img/m2.png" alt="Yellow magazine cover">
+                        <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                    </article>
+                    <article class="magazine-cover" data-title="La Photo a Rio" data-issue="Vol. 1, No. 3" data-description="A photojournalism feature showcasing the vibrant life and colors of Rio de Janeiro.">
+                        <img src="assets/img/m3.png" alt="Red magazine cover">
+                        <div class="preview-overlay"><button class="preview-btn">Preview</button></div>
+                    </article>
+                </div>
+                <div class="button-container">
+                    <a href="#" class="explore-btn">Explore Magazines</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Referral Program CTA (NEW DARK DESIGN) -->
+        <section class="referral-cta-section dark-section">
+            <!-- This container holds the content at 95% width -->
+            <div class="container">
+                <h2>Referral & Ambassador Program</h2>
+                <p>Join our growing community by referring students. Earn up to 20% commission on each successful registration depending on the course.</p>
+                <a href="#" class="cta-btn">Join Now</a>
+            </div>
+        </section>
 </div>
 
 <!-- The Magazine Modal -->

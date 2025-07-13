@@ -1,12 +1,32 @@
-/* --- General Setup & Variables --- */
+/*
+=================================================================
+    TABLE OF CONTENTS
+-----------------------------------------------------------------
+    1. General Setup & Variables
+    2. Page Layout & Shared Styles
+    3. Courses Section (Sidebar & Grid)
+    4. NEW: Dark Referral Program Section
+    5. Course Modal
+    6. Responsive Design
+=================================================================
+*/
+
+/* 1. General Setup & Variables
+-------------------------------------------------------------- */
 :root {
     --header-font: 'Times New Roman', Times, serif;
     --body-font: 'Lora', serif;
     --text-color: #2c2c2c;
     --light-text: #555;
     --background-color: #fffdf5;
-    --brand-yellow: #f4c430; /* We will use this for the gradient! */
+    --brand-yellow: #f4c430;
     --border-color: #ddd;
+
+    /* ADDED: Variables for the new dark theme */
+    --dark-bg: #121212;
+    --dark-section-text: #E0E0E0;
+    --dark-border-color: #333;
+    --dark-card-bg: #1a1a1a;
 }
 
 * {
@@ -17,72 +37,29 @@
 
 body {
     font-family: var(--body-font);
-    /* Changed to transparent to let the pseudo-element background show through */
-    background-color: transparent;
+    /* EDITED: Changed to a solid background color. Gradient is removed. */
+    background-color: var(--background-color);
     color: var(--text-color);
-    /* Added these for the effect to work properly */
     position: relative;
     overflow-x: hidden;
 }
 
-/* --- The Animated Gradient Background --- */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Place it behind all page content */
-
-    /* 1. The solid background color */
-    background-color: var(--background-color);
-
-    /* 2. The two blurry radial gradients */
-    /* We use RGBA to make the color from --brand-yellow semi-transparent. */
-    /* #f4c430 is equivalent to rgb(244, 196, 48) */
-    background-image:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(244, 196, 48, 0.4),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 70%,
-            rgba(244, 196, 48, 0.3),
-            transparent 50%
-        );
-
-    /* 3. Apply the animation */
-    animation: moveGradient 30s ease-in-out infinite;
-}
-
-/* --- Keyframes for the Animation --- */
-@keyframes moveGradient {
-    0% {
-        background-position: 0% 0%, 100% 100%;
-    }
-    25% {
-        background-position: 20% 80%, 80% 20%;
-    }
-    50% {
-        background-position: 100% 100%, 0% 0%;
-    }
-    75% {
-        background-position: 80% 20%, 20% 80%;
-    }
-    100% {
-        background-position: 0% 0%, 100% 100%;
-    }
-}
+/* REMOVED: The body::before pseudo-element and @keyframes for the gradient */
 
 .page-wrapper {
-    width: 95%; /* CORE REQUIREMENT */
+    width: 95%;
     margin: 0 auto;
 }
 
-/* --- Shared Styles --- */
-/* MODIFIED: Header is now left-aligned */
+/* NEW: Container for content inside full-width sections */
+.container {
+    width: 95%;
+    max-width: 1400px; /* Adjust to match your page-wrapper if needed */
+    margin: 0 auto;
+}
+
+/* 2. Page Layout & Shared Styles
+-------------------------------------------------------------- */
 .section-header {
     text-align: left;
     margin-bottom: 3rem;
@@ -90,9 +67,9 @@ body::before {
 .section-header h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1rem; }
 .section-header p { font-size: 1.1rem; line-height: 1.6; color: var(--light-text); max-width: 60ch; }
 
-/* --- Courses Section --- */
+/* 3. Courses Section (Sidebar & Grid)
+-------------------------------------------------------------- */
 .courses-section { padding: 5rem 0; }
-/* MODIFIED: Layout has vertical divider logic */
 .courses-layout {
     display: flex;
     gap: 3rem;
@@ -111,6 +88,10 @@ body::before {
 .filters-sidebar h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
 .filter-buttons { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 .filter-btn {
+    /* EDITED: Make buttons uniform width */
+    width: 100%;
+    text-align: center;
+    /* --- End of Edit --- */
     background-color: transparent; border: 1px solid #000000;
     padding: 0.6rem 1.5rem; border-radius: 50px; font-family: var(--body-font);
     font-size: 1rem; cursor: pointer; transition: all 0.3s ease;
@@ -120,16 +101,15 @@ body::before {
 /* --- Courses Grid --- */
 .courses-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-bottom: 2rem;
 }
-/* MODIFIED: Increased card height */
 .course-card {
     background: #fff; border-radius: 16px;
     border: 1px solid var(--border-color); overflow: hidden;
     display: flex; flex-direction: column;
-    min-height: 520px; /* Ensures all cards have a generous, consistent height */
+    min-height: 520px;
 }
 .course-card img { width: 100%; height: 220px; object-fit: cover; }
 .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
@@ -146,95 +126,90 @@ body::before {
     border-radius: 50px; border: none; font-size: 1.1rem; cursor: pointer;
 }
 
-/* --- General Variables (assuming they are in your main CSS) --- */
-:root {
-    --header-font: 'Times New Roman', Times, serif;
-    --body-font: 'Lora', serif;
-    --text-color: #2c2c2c;
-    --light-text: #555;
-    --brand-yellow: #f4c430; /* Primary brand color */
-    --brand-black: #1f2029; /* Primary dark color */
-    --border-color: #e8e8e8;
-    --card-bg: #ffffff;
 
-    /* MODIFIED: New color variables for the bars */
-    --commission-bar-bg: rgba(244, 196, 48, 0.2);  /* Lighter yellow/orange */
-    --commission-bar-text: #9d7c10;
-    --remarks-bar-bg: rgba(44, 44, 44, 0.1);    /* Lighter black/grey */
-    --remarks-bar-text: #333333;
-}
-
-/* --- Referral Section --- */
+/* ==============================================
+COMPACT REFERRAL PROGRAM SECTION - FULL WIDTH
+============================================== */
 .referral-section {
-    text-align: center;
-    padding: 5rem 0;
+    padding: 3rem 0 0; /* Top padding only */
+    background-color: var(--dark-bg);
+    color: var(--dark-section-text);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0; /* Remove bottom margin */
 }
 
 .referral-section h2 {
-    font-size: 3rem;
-    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem; /* Reduced spacing */
     font-family: var(--header-font);
+    color: #fff;
+    text-align: center;
+    padding: 0 1rem;
 }
 
 .referral-chart-container {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    margin-bottom: 1.5rem;
-    text-align: left;
+    background-color: var(--dark-card-bg);
+    border: 1px solid var(--dark-border-color);
+    border-radius: 12px 12px 0 0; /* Rounded top only */
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 1200px;
+    width: calc(100% - 2rem);
+    border-bottom: none; /* Remove bottom border */
 }
 
-/* --- Chart Grid Structure --- */
+/* Remove all bottom spacing from last elements */
+.note, .register-agent-btn {
+    margin-bottom: 0 !important;
+}
+
 .chart-header,
 .chart-row {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    align-items: flex-start;
+    grid-template-columns: 160px 1fr;
+    gap: 1rem;
+    align-items: center;
 }
 
 .chart-header {
     font-family: var(--header-font);
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--light-text);
-    padding: 0 1rem 1rem 1rem;
-    border-bottom: 1px solid var(--border-color);
+    padding: 0 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--dark-border-color);
 }
 
 .chart-row {
-    padding: 1.5rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.3s ease;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid var(--dark-border-color);
 }
 
 .chart-row:last-of-type {
     border-bottom: none;
 }
 
-.chart-row:hover {
-    background-color: #f9f9f9;
-}
-
 .course-name-cell {
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding-top: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
 }
 
 .chart-bars-cell {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px);
-    background-size: calc(100% / 6) 100%;
+    gap: 0.5rem;
 }
 
-/* --- Data Bar Styling (MODIFIED COLORS) --- */
 .commission-bar,
 .remarks-bar {
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
     font-size: 0.9rem;
     display: flex;
     justify-content: space-between;
@@ -242,71 +217,81 @@ body::before {
 }
 
 .commission-bar {
-    background-color: var(--commission-bar-bg); /* Now uses light yellow */
-    color: var(--commission-bar-text);
+    background-color: rgba(244, 196, 48, 0.15);
+    color: var(--brand-yellow);
 }
 
 .commission-bar strong {
-    font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .remarks-bar {
-    background-color: var(--remarks-bar-bg); /* Now uses light black/grey */
-    color: var(--remarks-bar-text);
+    background-color: rgba(224, 224, 224, 0.05);
+    color: #ccc;
 }
 
-
-/* --- Note and Button Styling --- */
 .note {
     color: var(--light-text);
-    max-width: 70ch;
-    margin: 0 auto;
-    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0 1rem;
 }
 
 .register-agent-btn {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     background-color: var(--brand-yellow);
     color: var(--text-color);
-    padding: 1rem 3rem;
+    padding: 1rem 2.5rem; /* Increased padding */
     border-radius: 50px;
     text-decoration: none;
-    font-weight: bold;
-    margin-top: 2rem;
-    transition: transform 0.3s ease;
+    font-weight: 600;
+    margin: 2rem auto 3rem; /* Added vertical spacing */
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(244, 196, 48, 0.3); /* Added subtle shadow */
+    transition: all 0.2s ease;
+    position: relative; /* For potential hover effects */
+    border: none;
+    cursor: pointer;
 }
 
 .register-agent-btn:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(244, 196, 48, 0.4);
 }
 
-/* --- Responsiveness --- */
+/* If you need even more spacing above the footer */
+.referral-section {
+    padding-bottom: 5rem; /* Adds space after button before footer */
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .referral-chart-container {
-        padding: 1rem;
+    .referral-section {
+        padding: 3rem 0;
     }
-    .chart-header {
-        display: none;
+
+    .referral-section h2 {
+        font-size: 2rem;
     }
+
+    .chart-header,
     .chart-row {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.75rem;
     }
-    .course-name-cell {
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .chart-bars-cell {
-        background-image: none;
-    }
-    .commission-bar, .remarks-bar {
-        width: 100% !important;
-        margin-left: 0 !important;
+
+    .chart-row {
+        padding: 1rem 0;
     }
 }
 
-/* --- Course Modal --- */
+/* 5. Course Modal (UNCHANGED)
+-------------------------------------------------------------- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(30, 30, 30, 0.7); backdrop-filter: blur(8px);
@@ -343,7 +328,9 @@ body::before {
     text-decoration: none; font-weight: bold;
 }
 
-/* --- Responsiveness --- */
+
+/* 6. Responsive Design (UPDATED FOR DARK THEME)
+-------------------------------------------------------------- */
 @media (max-width: 992px) {
     .courses-layout { flex-direction: column; }
     .filters-sidebar {
@@ -357,5 +344,19 @@ body::before {
     .section-header { text-align: center; }
     .section-header p { margin: 0 auto; }
     .modal-images-grid, .modal-info-grid { grid-template-columns: 1fr; }
-    .modal-content { padding: 4rem 1.5rem 2rem 1.5rem; } /* Extra top padding for close button space */
+    .modal-content { padding: 4rem 1.5rem 2rem 1.5rem; }
+
+    /* Responsive styles for dark theme chart */
+    .dark-section .referral-chart-container { padding: 1rem; }
+    .dark-section .chart-header { display: none; }
+    .dark-section .chart-row { grid-template-columns: 1fr; gap: 1rem; }
+    .dark-section .course-name-cell {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--dark-border-color);
+    }
+    .dark-section .chart-bars-cell { background-image: none; }
+    .dark-section .commission-bar, .dark-section .remarks-bar {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
 }

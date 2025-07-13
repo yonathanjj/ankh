@@ -4,14 +4,10 @@
     --body-font: 'Lora', serif;
     --text-color: #2c2c2c;
     --light-text: #555;
-    --background-color: #fffdf5;
+    --background-color: #fffdf5; /* The clean background you liked */
     --shadow-color: rgba(0, 0, 0, 0.08);
     --cta-btn-bg: #f4c430; /* Used for the excerpt border */
 
-    /* NEW: Colors for background blobs */
-    --blob-color-1: rgba(244, 196, 48, 0.3); /* Softer version of cta-btn-bg */
-    --blob-color-2: rgba(100, 149, 237, 0.2); /* A soft cornflower blue */
-    --blob-color-3: rgba(255, 182, 193, 0.25); /* A light pink */
 }
 
 * {
@@ -28,9 +24,6 @@ body {
     overflow-x: hidden;
     /* Added this - it's essential for the effect */
     position: relative;
-
-    /* NEW: Hide the default system cursor */
-    cursor: none;
 }
 
 /* --- The Animated Gradient Background --- */

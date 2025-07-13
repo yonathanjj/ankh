@@ -1,82 +1,100 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Service Card Horizontal Slider ---
-    const serviceSlider = document.querySelector('.slider-wrapper');
-    if (serviceSlider) {
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const cards = serviceSlider.querySelectorAll('.service-card');
-        let currentIndex = 0;
+    // --- Infinite Marquee Slider (stops on hover) ---
+    const sliderComponent = document.querySelector('.slider-component');
 
-        function updateServiceSlider() {
-            let cardsInView;
-            if (window.innerWidth <= 768) {
-                cardsInView = 1;
-            } else if (window.innerWidth <= 992) {
-                cardsInView = 2;
-            } else if (window.innerWidth <= 1200) {
-                 cardsInView = 3;
-            } else {
-                 cardsInView = 4;
-            }
+    if (sliderComponent) {
+        const sliderWrapper = sliderComponent.querySelector('.slider-wrapper');
+        const originalCards = sliderWrapper.querySelectorAll('.service-card');
 
-            const cardWidth = cards[0].offsetWidth + parseFloat(getComputedStyle(cards[0]).marginRight);
-            const maxIndex = cards.length - cardsInView;
-            currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+        if (originalCards.length === 0) return;
 
-            const offset = -currentIndex * cardWidth;
-            gsap.to(serviceSlider, { x: offset, duration: 0.6, ease: 'power3.inOut' });
+        // 1. CLONE ALL CARDS for a seamless loop
+        // The wrapper will now contain two full sets of cards.
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            sliderWrapper.appendChild(clone);
+        });
 
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex >= maxIndex;
-        }
+        // 2. CALCULATE THE TOTAL WIDTH of the original set of cards
+        let totalWidth = 0;
+        originalCards.forEach(card => {
+            // Add the card's full width including its margin
+            totalWidth += card.offsetWidth + parseFloat(getComputedStyle(card).marginRight);
+        });
 
-        nextBtn.addEventListener('click', () => { currentIndex++; updateServiceSlider(); });
-        prevBtn.addEventListener('click', () => { currentIndex--; updateServiceSlider(); });
+        // 3. CREATE THE GSAP TWEEN for the animation
+        // We animate the wrapper's x position by the total width of one set of cards.
+        let tween = gsap.to(sliderWrapper, {
+            x: -totalWidth,       // Move left by the width of the original set
+            duration: 25,         // The time it takes to scroll through one set (adjust as needed)
+            ease: "none",         // A constant, linear speed is crucial for a smooth marquee
+            repeat: -1,           // Repeat the animation infinitely
+        });
 
-        window.addEventListener('resize', updateServiceSlider);
-        updateServiceSlider();
+        // 4. ADD HOVER-TO-PAUSE FUNCTIONALITY
+        sliderComponent.addEventListener('mouseenter', () => {
+            tween.pause();
+        });
+
+        sliderComponent.addEventListener('mouseleave', () => {
+            tween.resume();
+        });
     }
 
-    // --- Events & Promotion Automatic Slider ---
-    const promoSlidesContainer = document.querySelector('.promo-slides');
-    if (promoSlidesContainer) {
-        const slides = Array.from(promoSlidesContainer.querySelectorAll('.promo-slide'));
-        const dotsContainer = document.querySelector('.promo-dots');
-        let currentSlide = 0;
-        let slideInterval;
+    // --- Events & Promotion Automatic Slider (Handles Multiple Instances) ---
 
-        if (slides.length > 0) {
-            slides.forEach((_, i) => {
-                const dot = document.createElement('button');
-                dot.classList.add('promo-dot');
-                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                dot.addEventListener('click', () => {
-                    goToPromoSlide(i);
-                    resetInterval();
+    // Find ALL sections that are meant to be sliders
+    const promoSections = document.querySelectorAll('.events-promotion-section');
+
+    // Loop through each section and initialize it as a separate slider
+    promoSections.forEach(section => {
+        // IMPORTANT: Find elements *within the current section*
+        const promoSlidesContainer = section.querySelector('.promo-slides');
+        const dotsContainer = section.querySelector('.promo-dots');
+
+        if (promoSlidesContainer && dotsContainer) {
+            const slides = Array.from(promoSlidesContainer.querySelectorAll('.promo-slide'));
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Only proceed if there are slides to show
+            if (slides.length > 0) {
+                // Create dots for this specific slider
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('promo-dot');
+                    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                    dot.addEventListener('click', () => {
+                        goToPromoSlide(i);
+                        resetInterval();
+                    });
+                    dotsContainer.appendChild(dot);
                 });
-                dotsContainer.appendChild(dot);
-            });
 
-            const dots = dotsContainer.querySelectorAll('.promo-dot');
+                const dots = dotsContainer.querySelectorAll('.promo-dot');
 
-            function goToPromoSlide(index) {
-                slides[currentSlide].classList.remove('active');
-                dots[currentSlide].classList.remove('active');
-                currentSlide = (index + slides.length) % slides.length;
-                slides[currentSlide].classList.add('active');
-                dots[currentSlide].classList.add('active');
+                // This function now only affects the slides and dots within its own section
+                function goToPromoSlide(index) {
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+                    currentSlide = (index + slides.length) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+
+                // This function resets the interval timer for this specific slider
+                function resetInterval() {
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(() => goToPromoSlide(currentSlide + 1), 3000);
+                }
+
+                // Initialize the slider
+                goToPromoSlide(0);
+                resetInterval();
             }
-
-            function resetInterval() {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(() => goToPromoSlide(currentSlide + 1), 3000);
-            }
-
-            goToPromoSlide(0);
-            resetInterval();
         }
-    }
+    });
 
     // --- Magazine Pop-up Modal Logic ---
     const magazineModal = document.getElementById('magazine-modal');

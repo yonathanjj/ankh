@@ -1,23 +1,21 @@
 /*
 =================================================================
-    TABLE OF CONTENTS
+    TABLE OF CONTENTS (REVISED)
 -----------------------------------------------------------------
     1. General Setup & Variables
-    2. Shared Components (Buttons, Titles)
-    3. Page Sections
-        3.1. Hero Section
-        3.2. Recent Magazines Section
-        3.3. Core Services Section
-        3.4. Latest Blog Posts Section
-        3.5. Upcoming Events Section
-        3.6. Testimonials Section
-        3.7. Student of the Week Section
-        3.8. Referral Program Section
-    4. Modals
-        4.1. General Modal Overlay
-        4.2. Magazine Modal
-        4.3. Event Modal
-    5. Responsive Design
+    2. Layout & Shared Components (Container, Buttons, Titles)
+    3. NEW: Hero Section (Video Background)
+    4. Standard Page Sections (Light Background)
+    5. NEW: Dark Sections (Textured Background)
+    6. Specific Section Styling
+        6.1. Recent Magazines
+        6.2. Core Services
+        6.3. Upcoming Events
+        6.4. Testimonials (Dark)
+        6.5. Student of the Week
+        6.6. Referral Program (Dark)
+    7. Modals
+    8. Responsive Design
 =================================================================
 */
 
@@ -26,11 +24,15 @@
 :root {
     --heading-font: 'Playfair Display', serif;
     --body-font: 'Inter', sans-serif;
+
+    /* Color Palette */
     --text-color: #1a1a1a;
     --light-text: #555;
-    --background-color: #ffffff;
-    --light-accent-bg: #fffbf2;
-    --cta-btn-bg: #f4c430; /* The color for our gradient */
+    --background-color: #F9F9F9; /* Off-white background */
+    --dark-bg: #121212; /* Dark background for specific sections */
+    --dark-section-text: #E0E0E0;
+    --cta-color: #f4c430;
+    --cta-hover-color: #eab61c;
     --border-color: #e0e0e0;
 }
 
@@ -40,83 +42,78 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--body-font);
-    /* Set to transparent to see the animated background behind it */
-    background-color: transparent;
+    background-color: var(--background-color);
     color: var(--text-color);
     overflow-x: hidden;
-    /* Add position: relative to properly contain the ::before pseudo-element */
-    position: relative;
+        padding-top: 0 !important;
 }
 
-/* --- The Animated Gradient Background --- */
-/* This pseudo-element creates our background effect */
-body::before {
-    content: '';
-    position: fixed; /* Covers the whole viewport and stays in place */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Pushes it behind all your page content */
-
-    /* 1. The solid background color from your variable */
-    background-color: var(--background-color);
-
-    /* 2. The two blurry orange radial gradients */
-    background-image:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(244, 196, 48, 0.35), /* Using our orange color with transparency */
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 70%,
-            rgba(244, 196, 48, 0.25), /* A slightly different transparency */
-            transparent 50%
-        );
-
-    /* 3. Apply the animation we define below */
-    animation: moveGradient 30s ease-in-out infinite;
-}
-
-/* --- Keyframes for the Animation --- */
-/* This defines the movement of the background gradients over 30 seconds */
-@keyframes moveGradient {
-    0% {
-        background-position: 0% 0%, 100% 100%;
-    }
-    25% {
-        background-position: 20% 80%, 80% 20%;
-    }
-    50% {
-        background-position: 100% 100%, 0% 0%;
-    }
-    75% {
-        background-position: 80% 20%, 20% 80%;
-    }
-    100% {
-        background-position: 0% 0%, 100% 100%;
-    }
-}
-
-.page-wrapper {
+/* 2. Layout & Shared Components
+-------------------------------------------------------------- */
+.container {
     width: 95%;
     margin: 0 auto;
 }
 
-/* 2. Shared Components
--------------------------------------------------------------- */
-.section-title {
-    font-family: var(--heading-font);
-    font-size: clamp(2.5rem, 4vw, 3rem);
-    margin-bottom: 3rem;
+section {
+    padding: 6rem 0;
+    position: relative;
 }
 
-.btn, .view-all-btn, .explore-btn, .learn-more-btn, .cta-button {
+.section-title {
+    font-family: var(--heading-font);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+
+.section-footer {
+    text-align: right;
+    margin-top: 3rem;
+}
+.section-footer-center {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn {
     display: inline-block;
-    background-color: var(--cta-btn-bg);
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+.btn-primary {
+    background-color: var(--cta-color);
+    color: var(--text-color);
+}
+.btn-primary:hover {
+    background-color: var(--cta-hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(244, 196, 48, 0.4);
+}
+.btn-secondary {
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+.btn-secondary:hover {
+    background-color: #fff;
+    color: var(--text-color);
+}
+.view-all-btn, .explore-btn, .learn-more-btn, .cta-button {
+    display: inline-block;
+    background-color: var(--cta-color);
     color: var(--text-color);
     padding: 0.9rem 2.8rem;
     border-radius: 50px;
@@ -124,340 +121,394 @@ body::before {
     font-weight: 500;
     font-size: 1.1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(244, 196, 48, 0.4);
     border: none;
     cursor: pointer;
 }
-
-.btn:hover, .view-all-btn:hover, .explore-btn:hover, .learn-more-btn:hover, .cta-button:hover {
+.view-all-btn:hover, .explore-btn:hover, .learn-more-btn:hover, .cta-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(244, 196, 48, 0.5);
+    background-color: var(--cta-hover-color);
 }
 
-/* 3. Page Sections
+
+/* 3. NEW: Hero Section
 -------------------------------------------------------------- */
-
-/* 3.1. Hero Section */
 .hero-section {
-    min-height: 95vh;
-    padding-top: 5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.hero-text {
-    position: relative;
-    z-index: 20;
-}
-.hero-text h1 {
-    font-family: var(--heading-font);
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-}
-.hero-text .subtitle {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--light-text);
-    max-width: 550px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-.hero-images {
-    position: absolute;
-    top: 250px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 1;
-    width: 100%;
-    max-width: 900px;
-    height: 600px;
-}
-.hero-card {
-    position: absolute;
-    width: 50%;
-    max-width: 450px;
-    height: 550px;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    /* Add overflow hidden to contain the overlay's rounded corners */
-    overflow: hidden;
-}
-.hero-card img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease; /* Add transition for blur */
-}
-.hero-card:hover {
-    transform: translateY(-15px) scale(1.05) rotate(var(--rotate-end));
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
-}
-/* ADDED: On hover, blur the image slightly */
-.hero-card:hover img {
-    filter: blur(4px) brightness(0.9);
-    transform: scale(1.05); /* Add a slight zoom to the image itself */
-}
-
-/* --- NEW STYLES FOR THE PREVIEW ICON --- */
-.preview-icon-overlay {
-    position: absolute;
-    inset: 0; /* shorthand for top, right, bottom, left = 0 */
-    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none; /* Allows the card below to still be clickable */
-}
-.hero-card:hover .preview-icon-overlay {
-    opacity: 1; /* Show the overlay on hover */
-}
-.preview-icon-overlay svg {
-    width: 60px;
-    height: 60px;
-    stroke: white;
-    stroke-width: 1.5;
-    /* Add a subtle drop shadow to the icon itself for depth */
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-}
-/* --- END NEW STYLES --- */
-
-.card-1 {
-    --rotate-start: -8deg;
-    --rotate-end: -12deg;
-    top: 0;
-    left: 5%;
-    transform: rotate(var(--rotate-start));
-}
-.card-2 {
-    --rotate-start: 8deg;
-    --rotate-end: 12deg;
-    top: 20px;
-    right: 5%;
-    z-index: 10;
-    transform: rotate(var(--rotate-start));
-}
-
-
-/* 3.2. Recent Magazines Section */
-/* 3.2. Recent Magazines Section */
-.recent-magazines-section {
-    padding: 6rem 0;
-    text-align: right; /* This aligns the button to the right */
-}
-.recent-magazines-section .section-title {
-    text-align: right; /* This aligns the title to the right */
-}
-.recent-magazine-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-bottom: 4rem;
-}
-.magazine-item {
-    text-align: center; /* This is now important to keep the date centered under the image */
-}
-.magazine-image-wrapper {
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1.5rem;
-}
-.magazine-image-wrapper:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-}
-.magazine-image-wrapper img {
-    width: 100%;
-    display: block;
-    /* CHANGE: Control the height by setting an aspect ratio */
-    aspect-ratio: 1 / 1; /* Makes the height 1.2x the width. Use 1/1 for square, 1/1.3 for taller, etc. */
-    object-fit: cover;     /* CRITICAL: Prevents the image from being squished */
-}
-.magazine-date {
-    font-family: var(--heading-font);
-    /* CHANGE: Increased font size */
-    font-size: 1.6rem;
-    color: var(--light-text);
-}
-
-/* 3.3. Core Services Section */
-.services-section {
-    padding: 6rem 0;
-}
-.services-section .section-title {
-    text-align: left;
-    margin-bottom: 2.5rem;
-    font-size: 2.5rem; /* Added explicit size for title */
-}
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-.service-item {
     text-align: center;
-}
-.service-image-wrapper {
-    border-radius: 20px;
+    color: #fff;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-    transition: transform 0.3s ease;
 }
-.service-image-wrapper:hover {
-    transform: translateY(-8px);
-}
-.service-image-wrapper img {
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: block;
-    aspect-ratio: 3 / 4;
+    height: 100%;
+    z-index: -2;
+}
+.hero-video {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
-.service-caption {
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+.hero-content h1 {
     font-family: var(--heading-font);
-    font-size: 1.5rem; /* Increased from 1.2rem */
-    margin-top: 1.5rem; /* Increased from 1.25rem */
-    line-height: 1.4;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
-.service-description { /* Added if you have description text */
-    font-size: 1.1rem; /* New size for normal text */
+.hero-content .subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--dark-section-text);
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
     line-height: 1.6;
-    margin-top: 0.75rem;
-    color: var(--light-text);
+}
+.hero-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+.scroll-down-indicator svg {
+    width: 30px;
+    height: 30px;
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -15px); }
+    60% { transform: translate(-50%, -7px); }
 }
 
-/* 3.4. Latest Blog Posts Section */
-.blog-section { padding: 6rem 0; }
-.blog-section .section-title { text-align: left; margin-bottom: 2.5rem; }
-.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; margin-bottom: 3rem; }
-.blog-post-item { text-align: left; }
-.blog-image-wrapper { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; margin-bottom: 1.5rem; }
-.blog-image-wrapper:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); }
-.blog-image-wrapper img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; }
-.blog-post-title { font-family: var(--heading-font); font-size: 1.7rem; line-height: 1.2; margin-bottom: 0.75rem; }
-.blog-post-date { font-size: 1rem; color: var(--light-text); line-height: 1.4; text-transform: uppercase; }
 
-/* 3.5. Upcoming Events Section */
-.upcoming-events-section { padding: 6rem 0; }
-.upcoming-events-section .section-title { text-align: center; }
-.event-list-container { display: flex; flex-direction: column; gap: 2.5rem; margin-bottom: 3rem; }
-.event-item { display: grid; grid-template-columns: 300px 1fr; gap: 2.5rem; align-items: center; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border-color); cursor: pointer; }
-.event-item:last-child { border-bottom: none; }
-.event-item .event-image { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.07); transition: box-shadow 0.3s ease; }
-.event-item:hover .event-image { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
-.event-item .event-image img { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
-.event-item .more-info-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
-.event-item:hover .more-info-overlay { opacity: 1; }
-.event-item .more-info-overlay button { font-family: var(--body-font); background: rgba(0,0,0,0.7); color: white; border: 1px solid white; padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; cursor: pointer; transform: scale(0.9); transition: transform 0.3s ease; }
-.event-item:hover .more-info-overlay button { transform: scale(1); }
-.event-details h3 { font-family: var(--heading-font); font-size: 1.8rem; margin-bottom: 1rem; }
-.event-details > p { color: var(--light-text); line-height: 1.6; font-size: 1.1rem; margin-bottom: 1.5rem; }
-.meta-info { display: flex; flex-direction: column; gap: 0.5rem; color: #777; }
+/* 4. Standard Page Sections
+-------------------------------------------------------------- */
+/* (Most styles are shared, specific tweaks below) */
 
-/* 3.6. Testimonials Section */
+
+/* 5. NEW: Dark Sections
+-------------------------------------------------------------- */
+.dark-section {
+    background-color: var(--dark-bg);
+    color: var(--dark-section-text);
+    /* This creates the textured dot pattern */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+.dark-section .section-title {
+    color: #fff;
+}
+.dark-section .service-caption,
+.dark-section .blog-post-title {
+    color: #fff;
+}
+
+
+/* 6. Specific Section Styling
+-------------------------------------------------------------- */
+
+/* 6.1. Recent Magazines Section */
+.recent-magazines-section .section-title { text-align: right; }
+.recent-magazines-section .section-footer { text-align: right; }
+.recent-magazine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+.magazine-item { text-align: center; }
+.magazine-image-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; margin-bottom: 1.5rem; }
+.magazine-image-wrapper:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); }
+.magazine-image-wrapper img { width: 100%; display: block; aspect-ratio: 1 / 1.2; object-fit: cover; }
+.magazine-date { font-family: var(--heading-font); font-size: 1.6rem; color: var(--light-text); }
+
+/* 6.2. Core Services Section */
+.services-section .section-title { text-align: left; }
+.services-section .section-footer { text-align: left; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+.service-item { text-align: center; }
+.service-image-wrapper { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07); transition: transform 0.3s ease; }
+.service-image-wrapper:hover { transform: translateY(-8px); }
+.service-image-wrapper img { width: 100%; display: block; aspect-ratio: 3 / 4; object-fit: cover; }
+.service-caption { font-family: var(--heading-font); font-size: 1.5rem; margin-top: 1.5rem; line-height: 1.4; }
+
+/* =================================================================== */
+/* --- 6.3. Upcoming Events Section (Final, Balanced Layout) --- */
+/* =================================================================== */
+
+.event-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- THE CORE LAYOUT FIX --- */
+.event-item {
+    display: grid;
+    /* This creates two columns: a fixed 300px for the image and
+       the rest of the space (1fr) for the text content. */
+    grid-template-columns: 300px 1fr;
+    gap: 4rem; /* A generous gap for a spacious, high-end feel */
+    align-items: center; /* Vertically aligns the image and text block */
+    padding: 3rem 0; /* Vertical spacing for each item */
+    border-bottom: 1px solid var(--border-color, #eee); /* The separator line */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.event-item:last-child {
+    border-bottom: none; /* No line under the very last event */
+}
+
+/* Optional: A very subtle background on hover to define the click area */
+.event-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+
+/* --- IMAGE STYLES --- */
+.event-item .event-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+}
+.event-item .event-image img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+
+/* --- OVERLAY & BUTTON (Kept as is) --- */
+.event-item .more-info-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.event-item:hover .more-info-overlay {
+    opacity: 1;
+}
+.event-item .more-info-overlay button {
+    font-family: var(--body-font, sans-serif);
+    background: rgba(255,255,255,0.9);
+    color: var(--text-color, #333);
+    border: none; padding: 0.8rem 2rem; border-radius: 50px;
+    font-size: 1rem; cursor: pointer; transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.event-item:hover .more-info-overlay button {
+    transform: scale(1);
+}
+
+
+/* --- TEXT DETAILS (Improved Typography & Spacing) --- */
+.event-details h3 {
+    font-family: var(--heading-font, serif);
+    font-size: 1.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--heading-color, #222);
+    transition: color 0.3s ease;
+}
+/* Subtle interactive feedback */
+.event-item:hover .event-details h3 {
+    color: var(--primary-color, #0056b3);
+}
+
+.event-details > p {
+    color: var(--light-text, #555);
+    line-height: 1.7; /* More space between lines for readability */
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.meta-info {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap cleanly if needed */
+    gap: 0.5rem 1.75rem; /* Vertical and horizontal gap between items */
+    color: #666; /* Slightly lighter to de-emphasize */
+    font-size: 0.9rem;
+}
+
+
+/* --- MOBILE RESPONSIVE STYLES --- */
+@media (max-width: 768px) {
+    .event-item {
+        grid-template-columns: 1fr; /* Stack image on top of text */
+        gap: 1.5rem;
+        padding: 2rem 0;
+    }
+
+    .event-details h3 {
+        font-size: 1.6rem;
+    }
+
+    .event-details > p {
+        font-size: 1rem;
+    }
+}
+
+/* =================================================================== */
+/* --- 6.4. Testimonials Section (Refined & Responsive) --- */
+/* =================================================================== */
+
+/* --- Section Background: Add texture and depth --- */
+.dark-section {
+    background-color: #121212;
+    /* A subtle radial gradient to create a vignette effect */
+    background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+}
+
+/* --- Keyframe Animations (Unchanged) --- */
 @keyframes scrollUp { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 @keyframes scrollDown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
 
-.testimonials-section {
-    padding: 7rem 0;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    overflow: hidden;
-    border-radius: 20px; /* CHANGE: Added the 20px curve to the whole section */
-}
+
+/* --- Desktop Layout (Screens > 992px) --- */
 .testimonials-container {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 4rem;
+    gap: 5rem; /* Increased gap for a more spacious feel */
     align-items: center;
 }
-.testimonials-intro {
-    padding-left: 2rem; /* CHANGE: Pushes the text away from the left edge */
-}
+
+/* 1. THE INTRO TEXT (Bigger & Bolder) */
 .testimonials-intro h2 {
-    font-family: var(--heading-font);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: 3rem; /* Significantly larger */
+    font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 .testimonials-intro p {
-    color: #b3b3b3;
-    line-height: 1.7;
     max-width: 45ch;
+    line-height: 1.8; /* More space for readability */
+    font-size: 1.1rem;
+    color: #b0b0b0; /* Softer than pure white */
 }
+
+/* 2. THE SCROLLING COLUMNS (Desktop) */
 .scrolling-testimonials-wrapper {
     height: 550px;
     overflow: hidden;
     position: relative;
     display: flex;
     gap: 1.5rem;
-    border-radius: 15px;
-    padding: 0 0.5rem;
+    /* A fade-out effect at the top and bottom */
     -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
     mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
+
 .testimonial-column {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 }
-#column1 {
-    animation: scrollUp 40s linear infinite;
-}
-#column2 {
-    transform: translateY(-25%);
-    animation: scrollDown 45s linear infinite;
-}
+#column1 { animation: scrollUp 40s linear infinite; }
+#column2 { transform: translateY(-25%); animation: scrollDown 45s linear infinite; }
 .scrolling-testimonials-wrapper:hover .testimonial-column {
     animation-play-state: paused;
 }
+
+/* 3. THE TESTIMONIAL CARDS (Polished Design) */
 .testimonial-card {
-    /* CHANGE: New, smoother, more visually appealing gradient */
-    background: linear-gradient(170deg, #d4a943 0%, #a27b2a 35%, #2e2e2e 70%, #1a1a1a 100%);
+    background: radial-gradient(circle at 0% 0%, #2a2a2a, #1f1f1f);
     padding: 2rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
+    border-radius: 16px; /* Slightly larger radius */
+    border: 1px solid #333;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     flex-shrink: 0;
 }
 .testimonial-card blockquote {
-    border: none;
-    padding: 0;
+    border: none; padding: 0;
     margin: 0 0 1.5rem 0;
     font-size: 1.1rem;
     line-height: 1.6;
     font-style: italic;
+    color: #e0e0e0;
 }
-.author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+.author { display: flex; align-items: center; gap: 1rem; }
 .author img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
+    width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--cta-color, #ffc107);
 }
 .author span {
-    font-family: var(--heading-font);
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-family: var(--heading-font, serif);
+    font-size: 1.2rem; font-weight: 600;
     color: #fff;
+    text-transform: capitalize; /* Cleaner look for names */
 }
 
-/* 3.7. Student of the Week Section */
-/* 3.7. Student of the Week Section */
-.sotw-section { padding: 7rem 0; }
-.sotw-section .section-title { text-align: center; margin-bottom: 4rem; }
+
+/* =================================================================== */
+/* --- Tablet & Mobile Responsive Styles (Screens <= 992px) --- */
+/* =================================================================== */
+@media (max-width: 992px) {
+
+    /* Stack intro text on top of testimonials */
+    .testimonials-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center; /* Center the intro text */
+    }
+    .testimonials-intro p {
+        max-width: 60ch; /* Allow more width when centered */
+        margin: 0 auto;
+    }
+
+    /* --- THE HORIZONTAL SCROLL CONVERSION --- */
+    .scrolling-testimonials-wrapper {
+        height: auto; /* Let content define the height */
+        display: flex;
+        flex-direction: row; /* Lay out columns horizontally */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        padding-bottom: 1.5rem; /* Space for the scrollbar */
+        /* Change the mask to fade left and right */
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        /* Add scroll snapping for a great UX */
+        scroll-snap-type: x mandatory;
+    }
+    /* Hide scrollbar visually but keep functionality */
+    .scrolling-testimonials-wrapper::-webkit-scrollbar { display: none; }
+    .scrolling-testimonials-wrapper { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .testimonial-column {
+        flex-direction: row; /* Lay out cards horizontally inside columns */
+        /* Disable all desktop animations and transforms */
+        animation: none;
+        transform: none !important;
+    }
+
+    .testimonial-card {
+        width: 80vw; /* Each card takes up 80% of the viewport width */
+        max-width: 350px; /* But not more than 350px */
+        scroll-snap-align: start; /* Each card is a snap point */
+    }
+}
+
+/* 6.5. Student of the Week Section */
 .sotw-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
 .sotw-slider { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 .sotw-image-stack { position: relative; width: 300px; height: 450px; }
@@ -468,60 +519,27 @@ body::before {
 .slide-image:not(.active):not(.prev):not(.next) { opacity: 0; transform: scale(0.7); z-index: 8; }
 .sotw-controls { display: flex; gap: 1rem; }
 .sotw-controls button { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--text-color); background-color: transparent; cursor: pointer; display: grid; place-items: center; transition: background-color 0.3s ease, transform 0.3s ease; }
-.sotw-controls button:hover { background-color: var(--light-accent-bg); transform: scale(1.1); }
-/* CHANGE: Target the svg inside the button */
-.sotw-controls button svg {
-    width: 24px;
-    height: 24px;
-}
+.sotw-controls button:hover { background-color: #eee; transform: scale(1.1); }
+.sotw-controls button svg { width: 24px; height: 24px; }
 .sotw-content h3 { font-family: var(--heading-font); font-size: 2.5rem; margin-bottom: 2rem; }
 .sotw-info-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
-/* The .info-icon class is now on the svg itself */
-.info-icon {
-    width: 28px;
-    height: 28px;
-    margin-top: 4px;
-    flex-shrink: 0; /* Prevents icon from shrinking */
-}
+.info-icon { width: 28px; height: 28px; margin-top: 4px; flex-shrink: 0; }
 .sotw-info-item div { font-size: 1.2rem; line-height: 1.5; }
 .sotw-info-item strong { color: var(--text-color); }
 .sotw-info-item span { color: var(--light-text); }
-.sotw-content blockquote { font-style: italic; color: var(--light-text); font-size: 1.1rem; line-height: 1.6; margin: 2rem 0; padding-left: 1rem; border-left: 3px solid var(--cta-btn-bg); }
-/* CHANGE: Target the svg inside the link */
-.sotw-social-link svg {
-    width: 32px;
-    height: 32px;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-.sotw-social-link:hover svg {
-    opacity: 1;
-}
+.sotw-content blockquote { font-style: italic; color: var(--light-text); font-size: 1.1rem; line-height: 1.6; margin: 2rem 0; padding-left: 1rem; border-left: 3px solid var(--cta-color); }
+.sotw-social-link svg { width: 32px; height: 32px; opacity: 0.7; transition: opacity 0.3s ease; }
+.sotw-social-link:hover svg { opacity: 1; }
 
-/* 3.8. Referral Program Section */
-.referral-section { padding: 7rem 0; }
-.referral-section .section-title { text-align: left; margin-bottom: 2rem; }
-.referral-card { background-color: #1a1a1a; color: #f0f0f0; border-radius: 20px; padding: 5rem 2rem; text-align: center; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+/* 6.6. Referral Program Section (Dark) */
+.referral-section .section-title { text-align: left; }
+.referral-card { background: #1f1f1f; border: 1px solid #333; border-radius: 16px; padding: 4rem 2rem; text-align: center; }
 .referral-card h2 { font-family: var(--heading-font); font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.2; color: #fff; margin-bottom: 1.5rem; }
-.referral-card p { font-family: var(--heading-font); font-style: italic; font-size: 1.2rem; color: #ccc; line-height: 1.6; max-width: 45ch; margin: 0 auto 2.5rem auto; }
+.referral-card p { font-size: 1.2rem; line-height: 1.6; max-width: 45ch; margin: 0 auto 2.5rem auto; }
 
-/* 4. Modals
+/* 7. Modals
 -------------------------------------------------------------- */
-
-/* 4.1. General Modal Overlay */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: grid;
-    place-items: center;
-    padding: 1rem;
-    visibility: hidden;
-    opacity: 0;
-}
-
-/* 4.2. Magazine Modal */
-#magazine-modal { background: rgba(30, 30, 30, 0.5); backdrop-filter: blur(10px); }
+.modal-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 1rem; visibility: hidden; opacity: 0; background: rgba(30, 30, 30, 0.5); backdrop-filter: blur(10px); }
 .modal-layout { background: #fff; border-radius: 16px; max-width: 900px; width: 100%; max-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; position: relative; overflow: hidden; padding: 2.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
 .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.5rem; color: #aaa; cursor: pointer; z-index: 20; line-height: 1; }
 .modal-image-container img { width: 100%; border-radius: 8px; }
@@ -529,11 +547,7 @@ body::before {
 #modal-title { font-family: var(--heading-font); font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 0.5rem; }
 #modal-issue { display: block; color: var(--light-text); margin-bottom: 1.5rem; font-style: italic; }
 #modal-description { font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
-#read-now-btn:hover { transform: scale(1.05); }
-
-/* 4.3. Event Modal */
-#event-modal { background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(8px); }
-.modal-content { background: var(--background-color, #fff); border-radius: 16px; max-width: 600px; width: 100%; padding: 3rem; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+#event-modal .modal-content { background: var(--background-color, #fff); border-radius: 16px; max-width: 600px; width: 100%; padding: 3rem; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
 .close-event-modal { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 2rem; color: #999; cursor: pointer; }
 #event-modal-title { font-family: var(--heading-font); font-size: 2.2rem; margin-bottom: 1rem; }
 #event-modal-description { font-size: 1.1rem; line-height: 1.6; color: var(--light-text); }
@@ -543,45 +557,23 @@ body::before {
 .notification-form input { flex-grow: 1; border: 1px solid #ccc; padding: 0.75rem; border-radius: 8px 0 0 8px; font-size: 1rem; }
 .notification-form button { background-color: var(--text-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0 8px 8px 0; font-size: 1rem; cursor: pointer; }
 
-/* 5. Responsive Design
+/* 8. Responsive Design
 -------------------------------------------------------------- */
 @media (max-width: 992px) {
-    .recent-magazine-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
-    .testimonials-container { grid-template-columns: 1fr; gap: 3rem; }
-    .testimonials-intro { text-align: center; }
-    .testimonials-intro p { margin-left: auto; margin-right: auto; }
+
     .sotw-container { grid-template-columns: 1fr; gap: 4rem; }
     .sotw-content { text-align: center; }
-    .sotw-info-item { text-align: left; }
-    .sotw-social-link { display: inline-block; }
+    .sotw-info-item { justify-content: center; }
 }
 
 @media (max-width: 768px) {
-    .hero-section { min-height: unset; padding: 5rem 1rem; }
-    .hero-images { display: flex; flex-direction: column; align-items: center; position: static; height: auto; gap: 2rem; margin-top: 3rem; }
-    .hero-card { position: static; transform: rotate(0); width: 70%; max-width: 300px; }
-    .hero-card:hover { transform: translateY(-10px) scale(1.03); }
-    .card-1, .card-2 { top: auto; left: auto; right: auto; transform: none; }
-    .modal-layout { grid-template-columns: 1fr; text-align: center; max-height: 85vh; padding: 2.5rem 1.5rem; }
+    section { padding: 4rem 0; }
+    .modal-layout { grid-template-columns: 1fr; text-align: center; max-height: 85vh; padding: 2.5rem 1.5rem; overflow-y: auto; }
     .modal-image-container { max-width: 300px; margin: 0 auto; }
-    .blog-section, .services-section { text-align: center; }
-    .blog-section .section-title, .services-section .section-title { text-align: center; }
-    .blog-grid { grid-template-columns: 1fr; gap: 3.5rem; max-width: 400px; margin-left: auto; margin-right: auto; }
-    .blog-post-item { text-align: center; }
-    .event-item { grid-template-columns: 1fr; gap: 1.5rem; }
-    .referral-card { padding: 4rem 1.5rem; }
-    .notification-form .form-group { flex-direction: column; gap: 0.5rem; }
-    .notification-form input, .notification-form button { border-radius: 8px; }
+    .referral-section .section-title { text-align: center; }
 }
 
 @media (max-width: 576px) {
-    .recent-magazine-grid { grid-template-columns: 1fr; gap: 3rem; max-width: 350px; margin-left: auto; margin-right: auto; }
-    .services-grid { grid-template-columns: 1fr; }
-    .scrolling-testimonials-wrapper { flex-direction: column; height: 600px; }
-    #column1, #column2 { transform: translateY(0); animation: scrollUp 50s linear infinite; }
-}
-
-@media (max-width: 480px) {
-    .hero-card { width: 90%; }
+    .notification-form .form-group { flex-direction: column; gap: 0.5rem; }
+    .notification-form input, .notification-form button { border-radius: 8px; }
 }

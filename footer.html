@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Times+New+Roman&display=swap" rel="stylesheet">
     <!-- GSAP for animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <style>
         /* --- General Setup --- */
@@ -23,15 +24,49 @@
             --input-bg: #ffffff;
         }
 
+        /*
+        ====================================================================
+        THE FIX: These styles should be in your MAIN CSS file.
+        They control the layout of the page that LOADS the footer.
+        ====================================================================
+        */
+        html {
+            height: 100%;
+        }
+
+        body {
+             margin: 0;
+             background-color: #fffdf5;
+             /* This turns the whole page into a vertical layout container */
+             display: flex;
+             flex-direction: column;
+             min-height: 100vh; /* Ensures the page is at least as tall as the screen */
+        }
+
+        /* You need a <main> tag on your page to wrap the content */
+        main {
+            flex-grow: 1; /* This tells the main content to take all available space, pushing the footer down */
+        }
+        /* ================================================================== */
+
+
         /* --- Main Footer Container --- */
         .footer-wrapper {
             font-family: var(--body-font);
             background-color: var(--footer-bg);
             color: var(--footer-text);
-            width: 95%; /* CORE REQUIREMENT */
-            margin: 2rem auto;
-            padding: 3rem;
-            border-radius: 15px; /* CORE REQUIREMENT */
+            padding: 4rem 0;
+
+            /* CHANGE #1: This was margin-top: 4rem.
+               The 'auto' tells the footer to push itself away from the content above it,
+               filling any empty space. This is the key change for the footer itself.
+            */
+            margin-top: auto;
+        }
+
+        .footer-container {
+            width: 90%;
+            margin: 0 auto;
         }
 
         /* --- Newsletter Section (Top Part) --- */
@@ -40,8 +75,8 @@
             justify-content: space-between;
             align-items: center;
             gap: 2rem;
-            padding-bottom: 2rem;
-            margin-bottom: 2rem;
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
             border-bottom: 1px solid rgba(44, 44, 44, 0.2);
         }
 
@@ -148,78 +183,79 @@
         }
 
         @media (max-width: 768px) {
-            .footer-wrapper { padding: 2rem; }
+            .footer-wrapper { padding: 3rem 0; }
             .newsletter-form { flex-direction: column; }
         }
     </style>
 </head>
-<body style="background-color: #fffdf5;"> <!-- Added body color for standalone viewing -->
+<body>
 
+<!-- The HTML for your footer is perfect. No changes were needed here. -->
 <footer class="footer-wrapper">
+    <div class="footer-container">
+        <div class="newsletter-section">
+            <h3>Sign up for our weekly<br>email news letter</h3>
+            <form action="#" class="newsletter-form">
+                <input type="email" placeholder="Your email" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
 
-    <div class="newsletter-section">
-        <h3>Sign up for our weekly<br>email news letter</h3>
-        <form action="#" class="newsletter-form">
-            <input type="email" placeholder="Your email" required>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/img/logo.png" alt="Ankh Logo">
+            </div>
+
+            <div class="footer-links links-quick">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Magazine</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">ERP Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links links-courses">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="#">Makeup School</a></li>
+                    <li><a href="#">Modeling School</a></li>
+                    <li><a href="#">Acting School</a></li>
+                    <li><a href="#">Course Catalog</a></li>
+                    <li><a href="#">Referral Program</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links links-legal">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links links-connect">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-    <div class="footer-content">
-        <div class="footer-logo">
-            <!-- IMPORTANT: Replace "logo.png" with your actual logo file -->
-            <img src="assets/img/logo.png" alt="Ankh Logo">
-        </div>
-
-        <div class="footer-links links-quick">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Magazine</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">ERP Login</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-links links-courses">
-            <h4>Courses</h4>
-            <ul>
-                <li><a href="#">Makeup School</a></li>
-                <li><a href="#">Modeling School</a></li>
-                <li><a href="#">Acting School</a></li>
-                <li><a href="#">Course Catalog</a></li>
-                <li><a href="#">Referral Program</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-links links-legal">
-            <h4>Legal</h4>
-            <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Refund Policy</a></li>
-                <li><a href="#">Sitemap</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-links links-connect">
-            <h4>Connect</h4>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">LinkedIn</a></li>
-            </ul>
-        </div>
-    </div>
-
 </footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger);
         gsap.from('.footer-wrapper', {
             duration: 1.2,
             opacity: 0,

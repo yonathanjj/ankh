@@ -1,11 +1,28 @@
-/* --- General Setup & Variables --- */
+/*
+=================================================================
+    TABLE OF CONTENTS
+-----------------------------------------------------------------
+    1. General Setup & Variables
+    2. Page Layout & Hero
+    3. Company Info Section
+    4. NEW: Dark Focus Areas Section
+    5. Leadership Team Section
+    6. FIXED: Trusted Clients Slider
+    7. Responsive Design
+=================================================================
+*/
+
+/* 1. General Setup & Variables
+-------------------------------------------------------------- */
 :root {
     --header-font: 'Times New Roman', Times, serif;
     --body-font: 'Lora', serif;
     --text-color: #2c2c2c;
     --light-text: #555;
-    --background-color: #fffdf5;
-    --cta-btn-bg: #f4c430; /* We'll use this color for the gradient! */
+    --background-color: #fffdf5; /* The clean, solid background color */
+    --dark-bg: #121212;
+    --dark-section-text: #E0E0E0;
+    --cta-btn-bg: #f4c430;
     --border-color: #ddd;
 }
 
@@ -17,84 +34,21 @@
 
 body {
     font-family: var(--body-font);
-    background-color: transparent; /* Body is transparent to see the pseudo-element behind it */
+    background-color: var(--background-color); /* REMOVED: Gradient animation is gone */
     color: var(--text-color);
     overflow-x: hidden;
-    position: relative;
 }
 
-/* This pseudo-element holds our background and animation */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Pushes it behind all other content */
-
-    /* The solid background color */
-    background-color: var(--background-color);
-
-    /* The two blurry radial gradients */
-    background-image:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(244, 196, 48, 0.4),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 70%,
-            rgba(244, 196, 48, 0.3),
-            transparent 50%
-        );
-
-    /*
-    ** NEW PART: APPLY THE ANIMATION **
-    This tells the element to use our 'moveGradient' animation.
-    - It takes 30 seconds to complete one cycle.
-    - 'ease-in-out' makes the movement smooth.
-    - 'infinite' makes it loop forever.
-    */
-    animation: moveGradient 30s ease-in-out infinite;
+.page-wrapper {
+    width: 95%;
+    margin: 0 auto;
 }
 
-/*
-** NEW PART: DEFINE THE ANIMATION **
-This @keyframes rule defines the steps of our animation. We are
-animating the `background-position` of our two gradients.
-*/
-@keyframes moveGradient {
-    0% {
-        /* Starting positions for the two gradients */
-        background-position: 0% 0%, 100% 100%;
-    }
-    25% {
-        /* Gradients move to new positions */
-        background-position: 20% 80%, 80% 20%;
-    }
-    50% {
-        /* They continue to drift across the screen */
-        background-position: 100% 100%, 0% 0%;
-    }
-    75% {
-        /* And move back... */
-        background-position: 80% 20%, 20% 80%;
-    }
-    100% {
-        /* ...back to the starting positions to create a seamless loop */
-        background-position: 0% 0%, 100% 100%;
-    }
-}
-
-.page-wrapper { width: 95%; margin: 0 auto; }
-
-
-/* --- Headers & Hero Image (MODIFIED) --- */
+/* 2. Page Layout & Hero
+-------------------------------------------------------------- */
 .page-header {
     display: flex;
     justify-content: space-between;
-    /* Aligns items to the top instead of center */
     align-items: flex-start;
     padding: 5rem 0 3rem 0;
     gap: 4rem;
@@ -102,117 +56,258 @@ animating the `background-position` of our two gradients.
 .page-header h2 {
     font-size: clamp(3rem, 6vw, 4.5rem);
     flex-shrink: 0;
-    line-height: 1; /* Tighter line height for the title */
+    line-height: 1;
 }
 .page-header p {
-    font-size: 1.2rem; /* Increased font size */
+    font-size: 1.2rem;
     line-height: 1.7;
     color: var(--light-text);
-    padding-top: 0.5rem; /* Pushes text down slightly from the top */
+    padding-top: 0.5rem;
 }
-.hero-image { max-height: 700px; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-.hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-image {
+    max-height: 700px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-/* --- Company Info Section --- */
+/* 3. Company Info Section
+-------------------------------------------------------------- */
 .company-info { padding: 5rem 0; }
 .info-item { display: flex; align-items: baseline; gap: 4rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border-color); }
 .info-item h3 { flex: 0 0 200px; font-size: 2.5rem; }
 .info-item p { flex: 1; font-size: 1.2rem; line-height: 1.7; color: var(--light-text); }
 .info-item:last-of-type, .core-values { border-bottom: none; }
-
-/* --- Core Values Section --- */
 .core-values { padding: 2.5rem 0; display: flex; align-items: baseline; gap: 4rem; border-bottom: 1px solid var(--border-color); }
 .core-values h3 { flex: 0 0 200px; font-size: 2.5rem; }
 .values-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
 .value-item { font-size: 1.1rem; text-align: left; }
 
-/* --- Focus Areas Section (RESTORED) --- */
-.focus-areas { padding: 5rem 0; }
-.focus-areas h2 { font-size: 3rem; margin-bottom: 3rem; text-align: center; }
+/* 4. NEW: Dark Focus Areas Section
+/* --- Dark Focus Areas Section (Rewritten) --- */
+.dark-section {
+    /* EDITED: Increased vertical padding for more height */
+    padding: 8rem 0;
+    margin-top:5rem;
+
+    /* The dotted black background */
+    background-color: #121212;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+
+    /* This trick makes the background 100% full-width */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* NEW: This is the container for the 95% width content */
+.focus-areas-content {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.dark-section h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #fff;
+}
+
 .focus-grid-horizontal {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    margin-bottom: 3rem;
+    /* EDITED: Increased margin to push the button down */
+    margin-bottom: 4rem;
 }
-.focus-card {
-    border-radius: 16px; padding: 2rem;
-    color: white; text-align: left;
-    background-size: cover; background-position: center;
-    min-height: 350px;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    position: relative; overflow: hidden;
-}
-.focus-card::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to top, rgba(244, 196, 48, 0.8) 0%, rgba(200, 160, 40, 0.2) 60%, transparent 100%);
-}
-.focus-card h3, .focus-card p { position: relative; z-index: 2; }
-.focus-card h3 { font-size: 2rem; }
-.focus-card p { font-size: 1.1rem; line-height: 1.6; margin-top: 1rem; }
-.button-container { text-align: left; }
-.explore-btn { display: inline-block; background-color: var(--cta-btn-bg); color: var(--text-color); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; }
 
-/* --- Leadership Team Section --- */
+.focus-card {
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    text-align: left;
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: transform 0.4s ease;
+}
+
+.focus-card:hover {
+    transform: translateY(-10px);
+}
+
+.focus-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* A darker overlay for better text readability */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+    z-index: 1;
+}
+
+.focus-card h3, .focus-card p {
+    position: relative;
+    z-index: 2; /* Text on top of the overlay */
+}
+
+.focus-card h3 {
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.focus-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.button-container {
+    /* EDITED: Aligned the button to the left */
+    text-align: left;
+}
+
+.explore-btn {
+    display: inline-block;
+    background-color: #f4c430; /* Your --cta-btn-bg color */
+    color: #2c2c2c; /* Your --text-color */
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(244, 196, 48, 0.3);
+}
+
+/* Responsive adjustments for the grid */
+@media (max-width: 1200px) {
+    .focus-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .focus-grid-horizontal {
+        grid-template-columns: 1fr;
+    }
+    .button-container {
+        text-align: center; /* Center the button on mobile for better balance */
+    }
+}
+
+
+/* 5. Leadership Team Section
+-------------------------------------------------------------- */
 .team-section { padding: 5rem 0; }
 .team-header { text-align: right; font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 3rem; }
 .team-layout { display: flex; align-items: flex-start; gap: 5rem; }
-.team-photos-artistic {
-    flex: 1.2;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    align-items: flex-start;
-}
+.team-photos-artistic { flex: 1.2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: flex-start; }
 .photo-column { display: flex; flex-direction: column; gap: 2rem; }
 .photo-column:nth-child(2) { margin-top: 4rem; }
 .photo-column:nth-child(3) { margin-top: 8rem; }
-.team-member {
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: pointer;
-}
+.team-member { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: pointer; }
 .team-member:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .team-member img { width: 100%; height: 300px; object-fit: cover; display: block; }
 .team-list { flex: 1; margin-top: 2rem; }
 .team-list ul { list-style: none; }
-.team-list li {
-    padding: 1rem 0; border-bottom: 1px solid var(--border-color);
-    position: relative; opacity: 0.5; transition: opacity 0.3s ease;
-}
+.team-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); position: relative; opacity: 0.5; transition: opacity 0.3s ease; }
 .team-list li::before { content: '—'; position: absolute; left: -2rem; color: var(--light-text); }
 .team-list li strong, .team-list li span { display: block; }
-.team-list li strong { font-size: 1.8rem; }
+.team-list li strong { font-size: 1.8rem; transition: color 0.3s ease; }
 .team-list li span { font-size: 1rem; color: var(--light-text); margin-top: 0.25rem; }
 .team-list li.highlight { opacity: 1; }
-.team-list li.highlight strong { text-shadow: 0 0 10px rgba(244, 196, 48, 0.7); }
+.team-list li.highlight strong { color: var(--cta-btn-bg); text-shadow: none; }
 
-/* --- Trusted Clients Section --- */
-.clients-section-wrapper { width: 100vw; position: relative; left: 50%; transform: translateX(-50%);  }
-.clients-content {  margin: 0 auto; text-align: center; padding: 5rem 0; }
-.clients-content h2 { font-size: 3rem; margin-bottom: 3rem; }
-.clients-slider { overflow: hidden; position: relative; }
-.clients-slider:before, .clients-slider:after {
-    content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2;
+/* Trusted Clients Slider - Full Width */
+.clients-section-wrapper {
+    padding: 5rem 0;
+    width: 100%;
+    overflow: hidden;
 }
 
-@keyframes scroll-infinite { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.clients-track { display: flex; width: calc(240px * 12); animation: scroll-infinite 40s linear infinite; }
-.clients-track img { height: 60px; width: auto; margin: 0 40px; filter: grayscale(100%); opacity: 0.6; transition: filter 0.3s, opacity 0.3s; }
-.clients-track:hover img { filter: grayscale(0%); opacity: 1; }
+.clients-content {
+    text-align: center;
+    width: 100%;
+}
 
-/* --- Responsiveness --- */
+.clients-content h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+
+.clients-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to right,
+        transparent,
+        black 5%,
+        black 95%,
+        transparent
+    );
+    mask-image: linear-gradient(to right,
+        transparent,
+        black 5%,
+        black 95%,
+        transparent
+    );
+}
+
+.clients-track {
+    display: inline-flex; /* Changed to inline-flex for better width handling */
+    will-change: transform;
+    white-space: nowrap;
+}
+
+.clients-track img {
+    height: 80px;
+    width: auto;
+    margin: 0 45px;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: filter 0.3s, opacity 0.3s;
+}
+
+.clients-track img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* 7. Responsive Design
+-------------------------------------------------------------- */
 @media (max-width: 1200px) {
     .focus-grid-horizontal { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 992px) {
-    .page-header, .info-item, .core-values { flex-direction: column; text-align: center; }
+    .page-header, .info-item, .core-values { flex-direction: column; text-align: center; gap: 1rem; }
     .page-header p, .info-item p { margin: 1rem auto 0 auto; text-align: center; }
     .info-item h3, .core-values h3 { text-align: center; flex-basis: auto; }
-    .team-layout { flex-direction: column; }
+    .team-layout { flex-direction: column; gap: 2rem; }
 }
 @media (max-width: 768px) {
     .focus-grid-horizontal { grid-template-columns: 1fr; }
     .team-photos-artistic { grid-template-columns: 1fr 1fr; }
     .photo-column:nth-child(3) { display: none; }
+    .photo-column:nth-child(2) { margin-top: 2rem; }
 }

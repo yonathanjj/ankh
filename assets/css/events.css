@@ -34,18 +34,8 @@ body::before {
     height: 100%;
     z-index: -1;
     background-color: var(--background-color);
-    background-image:
-        radial-gradient(circle at 15% 20%, rgba(244, 196, 48, 0.4), transparent 40%),
-        radial-gradient(circle at 85% 70%, rgba(244, 196, 48, 0.3), transparent 50%);
-    animation: moveGradient 30s ease-in-out infinite;
-}
 
-@keyframes moveGradient {
-    0% { background-position: 0% 0%, 100% 100%; }
-    25% { background-position: 20% 80%, 80% 20%; }
-    50% { background-position: 100% 100%, 0% 0%; }
-    75% { background-position: 80% 20%, 20% 80%; }
-    100% { background-position: 0% 0%, 100% 100%; }
+    animation: moveGradient 30s ease-in-out infinite;
 }
 
 .page-wrapper {
@@ -156,34 +146,88 @@ select {
     font-size: 1rem;
 }
 
-/* --- CTA Card --- */
-.cta-card {
-    background-color: var(--cta-bg); color: #fff;
-    padding: 4rem; margin: 5rem 0;
-    text-align: center; border-radius: 15px;
+/* --- CTA Section (Rewritten for Full-Width Dark Theme) --- */
+.dark-section {
+    /* These styles can be shared if you have a utility class, */
+    /* but are included here for completeness. */
+    padding: 6rem 0; /* Vertical spacing */
+
+    /* The dotted black background */
+    background-color: #121212; /* A very dark grey, your --dark-bg */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+
+    /* This makes the section 100% edge-to-edge */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
-.cta-card h2 {
-    /* CHANGE: Increased clamp values for a larger heading */
+
+.cta-content {
+    /* This centers the content inside the full-width section */
+    text-align: center;
+}
+
+.dark-section h2 {
     font-size: clamp(2.2rem, 4vw, 3.5rem);
     line-height: 1.2;
     margin-bottom: 1.5rem;
+    color: #fff; /* White text for the heading */
 }
-.cta-card p {
-    color: #ccc;
+
+.dark-section p {
+    color: #ccc; /* Slightly off-white for the paragraph for good hierarchy */
     line-height: 1.7;
-    /* CHANGE: Larger paragraph text in CTA */
     font-size: 1.2rem;
     margin: 0 auto 2.5rem auto;
     max-width: 65ch;
 }
-.cta-btn {
-    display: inline-block; background-color: var(--cta-btn-bg); color: var(--text-color);
-    padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold;
-    transition: transform 0.3s ease;
-    /* CHANGE: Added explicit font size for consistency */
+
+.dark-section .cta-btn {
+    display: inline-block;
+    background-color: #f4c430; /* Your --cta-btn-bg color */
+    color: #2c2c2c;           /* Your --text-color */
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500; /* A modern font weight */
+    font-family: 'Inter', sans-serif; /* Recommended for buttons for clarity */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     font-size: 1.1rem;
 }
-.cta-btn:hover { transform: scale(1.05); }
+
+.dark-section .cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(244, 196, 48, 0.3);
+}
+@media (max-width: 768px) {
+  .dark-section {
+    padding: 4rem 1.5rem; /* Less vertical space and horizontal padding */
+  }
+
+  .dark-section h2 {
+    font-size: 1.8rem; /* Slightly smaller headline for mobile */
+  }
+
+  .dark-section p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .dark-section .cta-btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .cta-content {
+    text-align: center;
+    padding: 0 1rem;
+  }
+}
+
 
 /* --- Modal --- */
 .modal-overlay {

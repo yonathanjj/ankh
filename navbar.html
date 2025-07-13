@@ -6,166 +6,174 @@
   <title>Navigation Bar</title>
   <style>
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Times New Roman", Times, serif;
-    }
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: "Times New Roman", Times, serif;
+ }
 
-    body {
-        background: #f5f5f5;
-    }
+ body {
+     background: #f5f5f5;
+     /* --- FIX FOR CONTENT OVERLAP --- */
+     /* This padding is crucial. It pushes the start of your page content down */
+     /* so it's not hidden behind the fixed navbar. Adjust the value as needed. */
+     padding-top: 100px;
+ }
 
-    .navbar {
-        width: 95%;
-        margin: 20px auto;
-        background-color: #11141F;
-        border-radius: 10px;
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+ .navbar {
+     /* --- CORE CHANGES FOR FLOATING EFFECT --- */
+     position: fixed; /* Takes the navbar out of the document flow */
+     top: 20px;       /* Positions it 20px from the top of the viewport */
+     left: 2.5%;      /* Positions it 2.5% from the left */
+     right: 2.5%;     /* Positions it 2.5% from the right */
+     width: 95%;      /* Ensures it's 95% wide */
+     z-index: 1000;   /* Keeps it on top of all other content */
+     margin: 0 auto;  /* The margin is now only for horizontal centering */
+     /* --- END OF CORE CHANGES --- */
 
-    .logo-img img {
-    width: 40px; /* or any size you prefer */
-    height: auto;
-}
+     background-color: #11141F;
+     border-radius: 10px;
+     padding: 15px 30px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow for better depth */
+ }
 
+ .logo-img img {
+     width: 40px;
+     height: auto;
+ }
 
-    .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 30px;
-    }
+ .nav-links {
+     display: flex;
+     list-style: none;
+     gap: 30px;
+ }
 
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        transition: color 0.3s;
-        position: relative;
-    }
+ .nav-links a {
+     color: white;
+     text-decoration: none;
+     font-size: 18px;
+     transition: color 0.3s;
+     position: relative;
+ }
 
-    .nav-links a:hover {
-        color: #D48A00;
-    }
+ .nav-links a:hover {
+     color: #D48A00;
+ }
 
-    .nav-links a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        background: #D48A00;
-        bottom: -5px;
-        left: 0;
-        transition: width 0.3s;
-    }
+ .nav-links a::after {
+     content: '';
+     position: absolute;
+     width: 0;
+     height: 2px;
+     background: #D48A00;
+     bottom: -5px;
+     left: 0;
+     transition: width 0.3s;
+ }
 
-    .nav-links a:hover::after {
-        width: 100%;
-    }
+ .nav-links a:hover::after {
+     width: 100%;
+ }
 
-    .auth-buttons {
-        display: flex;
-        gap: 15px;
-    }
+ .auth-buttons {
+     display: flex;
+     gap: 15px;
+ }
 
-    .btn {
-        padding: 10px 20px;
-        border-radius: 45px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
+ .btn {
+     padding: 10px 20px;
+     border-radius: 45px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: all 0.3s;
+ }
 
-    .btn-login {
-        background: transparent;
-        color: white;
-        border: 1px solid white;
-    }
+ .btn-login {
+     background: transparent;
+     color: white;
+     border: 1px solid white;
+ }
 
-    .btn-login:hover {
-        background: white;
-        color: #11141F;
-    }
+ .btn-login:hover {
+     background: white;
+     color: #11141F;
+ }
 
-    .btn-signup {
-        background: #D48A00;
-        color: white;
-        border: 1px solid #D48A00;
-    }
+ .btn-signup {
+     background: #D48A00;
+     color: white;
+     border: 1px solid #D48A00;
+ }
 
-    .btn-signup:hover {
-        background: #e69a0e;
-    }
+ .btn-signup:hover {
+     background: #e69a0e;
+ }
 
-    .menu-toggle {
-        display: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-    }
+ .menu-toggle {
+     display: none;
+     cursor: pointer;
+     flex-direction: column;
+     gap: 5px;
+ }
 
-    .menu-toggle span {
-        width: 25px;
-        height: 3px;
-        background: white;
-        border-radius: 3px;
-        transition: all 0.3s;
-    }
+ .menu-toggle span {
+     width: 25px;
+     height: 3px;
+     background: white;
+     border-radius: 3px;
+     transition: all 0.3s;
+ }
 
-    @media (max-width: 992px) {
-        .nav-links {
-            gap: 20px;
-        }
-    }
+ @media (max-width: 992px) {
+     .nav-links {
+         gap: 20px;
+     }
+ }
 
-    @media (max-width: 768px) {
-        .navbar {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 15px 20px;
-        }
+ @media (max-width: 768px) {
+     .navbar {
+         flex-direction: column;
+         align-items: flex-start;
+         padding: 15px 20px;
+     }
 
-        .nav-links {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            gap: 15px;
-            margin: 20px 0;
-        }
+     .nav-links {
+         display: none;
+         flex-direction: column;
+         width: 100%;
+         gap: 15px;
+         margin: 20px 0;
+     }
 
-        .nav-links.active {
-            display: flex;
-        }
+     .nav-links.active {
+         display: flex;
+     }
 
-        .auth-buttons {
-            display: none;
-            width: 100%;
-            justify-content: center;
-            margin-top: 10px;
-        }
+     .auth-buttons {
+         display: none;
+         width: 100%;
+         justify-content: center;
+         margin-top: 10px;
+     }
 
-        .auth-buttons.active {
-            display: flex;
-        }
+     .auth-buttons.active {
+         display: flex;
+     }
 
-        .menu-toggle {
-            display: flex;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
-
-        .logo {
-            font-size: 20px;
-        }
-    }
+     .menu-toggle {
+         display: flex;
+         position: absolute;
+         right: 20px;
+         top: 20px;
+     }
+ }
   </style>
 </head>
 <body>
+
 <nav class="navbar">
   <div class="logo-section">
     <div class="logo-img">
@@ -209,11 +217,11 @@
 
       // Animate the menu toggle icon
       if (navLinks.classList.contains('active')) {
-          gsap.to(menuToggle.children[0], { rotation: 45, y: 8 });
-          gsap.to(menuToggle.children[1], { opacity: 0 });
-          gsap.to(menuToggle.children[2], { rotation: -45, y: -8 });
+          gsap.to(menuToggle.children[0], { rotation: 45, y: 8, duration: 0.3 });
+          gsap.to(menuToggle.children[1], { opacity: 0, duration: 0.3 });
+          gsap.to(menuToggle.children[2], { rotation: -45, y: -8, duration: 0.3 });
       } else {
-          gsap.to(menuToggle.children, { rotation: 0, y: 0, opacity: 1 });
+          gsap.to(menuToggle.children, { rotation: 0, y: 0, opacity: 1, duration: 0.3 });
       }
   });
 
